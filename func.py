@@ -145,6 +145,7 @@ def get_movie_data(movie_json_file : dict) -> dict:
                 dl_datails['sub']["dl_HLS"]["size"] = i['size']
                 
     return {
+        "id": id,
         "name": name,
         "name_fa": name_fa,
         "poster": poster,

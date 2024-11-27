@@ -15,8 +15,13 @@ with open("movie_data_movie.json", "r", encoding="utf-8") as request_getAllTitle
 y = {"erros_name_movie" : []}
 total_items = len(request_getAllTitles_json_file)
 categories = {'irani' : 7558 , 'dubble' : 6 , 'zernevis' : 2572 , 'animations': 8775}
-
-with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{percentage:.1f}%]", colour="green") as progress_bar:
+db_post_backdrop = {"data" : []}
+with tqdm(total=total_items, 
+          bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{percentage:.1f}%] Remaining: {remaining}", 
+          colour="green", 
+          dynamic_ncols=True,  # تنظیم اندازه دینامیک نوار پیشرفت
+          miniters=1) as progress_bar:  # بروزرسانی بیشتر برای نمایش دقیقتر زمان باقی‌مانده
+    progress_bar.set_description(f"{Fore.CYAN}Processing{Style.RESET_ALL}")
 
     for movie in request_getAllTitles_json_file :
         for attempt in range(3):
@@ -242,8 +247,9 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 continue
 
                         if response.status_code == 200:
-                            progress_bar.set_description(f"{Fore.CYAN}Processing{Style.RESET_ALL}")
+                            db_post_backdrop['data'].append({movie_data['id'] :  {"post_id" : post_id, "poster_id" : poster_id}})
                             progress_bar.update(1)
+
                         else:
                             print("Failed to update post:", response.text)
                     else:
@@ -254,4 +260,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             
 
 with open('errors.json', 'w', encoding='UTF-8') as file:
-        file.write(json.dumps(y, ensure_ascii=False))
+    file.write(json.dumps(y, ensure_ascii=False))
+
+with open('poster.json', 'w', encoding='UTF-8') as file:
+    file.write(json.dumps(db_post_backdrop, ensure_ascii=False))
