@@ -108,17 +108,19 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     quality_meta = 'Bluray'
                 else :
                     if movie_data['dl_datials']['sub_links']['dl_1080']['size'] != "" or movie_data['dl_datials']['dub_links']['dl_1080']['size'] != "":
-                        quality_meta = "1080"
+                        quality_meta = "Full HD"
                     else :
                         if movie_data['dl_datials']['sub_links']['dl_720']['size'] != "" or movie_data['dl_datials']['dub_links']['dl_720']['size'] != "":
-                            quality_meta = "720"
+                            quality_meta = "HD"
                         else :
                             if movie_data['dl_datials']['sub_links']['dl_480']['size'] != "" or movie_data['dl_datials']['dub_links']['dl_480']['size'] != "":
-                                quality_meta = "480"
+                                quality_meta = "SD"
 
                 lang = ''
-                if movie_data['isirani'] == 1 or movie_data['isdoubble'] == 1 and movie_data['dl_datials']['sub_links']['dl_480']['size'] == "":
+                if movie_data['isirani'] == 1 and movie_data['dl_datials']['sub_links']['dl_480']['size'] == "":
                     lang = "فارسی"
+                elif movie_data['isdoubble'] == 1 and movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" and movie_data['isirani'] == 0 :
+                     lang = "دوبله فارسی"
                 elif movie_data['isirani'] == 0 and movie_data['isdoubble'] == 0 and movie_data['dl_datials']['dub_links']['dl_480']['size'] == "":
                     lang = "زبان اصلی با زیرنویس فارسی"
                 elif movie_data['dl_datials']['sub_links']['dl_480']['size'] != "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] != "":
@@ -416,6 +418,25 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                     ]
                                 }
                             ]  
+                    
+
+                type_file = ""
+                if categories['animation'] in categorie :
+                    type_file = "انیمیشن"
+                else :
+                    type_file = "فیلم"
+                countryyy = ''
+                if movie_data['isirani'] != 1 :
+                    if imdb_data['Country'] != "N/A" :
+                        countryyy = imdb_data['Country'] 
+                else :
+                    countryyy = "ایران"
+                if lang == "فارسی" :
+                    lang = "زبان فارسی"
+                genres_ls = movie_data['genre']
+                about = f"{type_file} {movie_data['name_fa']} محصول کشور {countryyy} در ژانر {genres_ls} که در سال {str(movie_data['year'])} ساخته شده است. شما میتوانید به انتخاب خودتان این {type_file} را با {lang} با بهترین کیفیت دانلود و یا به صورت آنلاین از مووی پیکس تماشا کنید."
+                if lang == "زبان فارسی" :
+                    lang = "فارسی"
                 send_data = {
                         "yearr": years[str(movie_data['year'])],
                         "type_of_post": [ 995 ],
@@ -428,7 +449,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         "genre" : genres,
                         "acf": {
                             "Language" : lang,
-                            "about" : "about",
+                            "about" : about,
                             "quality-meta" : quality_meta,
                             "en_title" : movie_data['name'],
                             "slider_image2": {
