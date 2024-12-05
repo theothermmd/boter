@@ -380,13 +380,13 @@ def media_gen(poster_url: str, poster_name: str) -> dict:
         return {"status": None, "message": "Error in get poster from url"}
 
 
-def get_Actors_as_list(): 
-    actors = {'actors' : []}
+def get_year_as_list(): 
+    yearr = {'yearr' : []}
 
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/actor?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/yearr?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -397,13 +397,13 @@ def get_Actors_as_list():
             if len(response.json()) == 0 :
                 return {"status": None, "message": "Error in 2"}
             for j in response.json() :
-                actors['actors'].append({'name' : j['name'] , 'id' : j['id']})
+                yearr['yearr'].append({'name' : j['name'] , 'id' : j['id']})
 
-            return actors['actors']
+            return yearr['yearr']
         
 
 
-def get_Actors(name: str , actors : list): 
+def get_yearr(name: str , actors : list): 
 
             flg = False
             for i in actors :
@@ -417,12 +417,12 @@ def get_Actors(name: str , actors : list):
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_actor = requests.post( f"https://vod.tarinet.ir/wp-json/wp/v2/actor", headers=headers,  json=data, timeout=30)
-                if new_actor.status_code != 400 :
-                    actors.append({'name' : name , 'id' : new_actor.json()['id']})
-                    return  {'flag' : True , 'name' : new_actor.json()['name'] , 'id' : new_actor.json()['id']}
+                new_yearr = requests.post( f"https://vod.tarinet.ir/wp-json/wp/v2/yearr", headers=headers,  json=data, timeout=30)
+                if new_yearr.status_code != 400 :
+                    actors.append({'name' : name , 'id' : new_yearr.json()['id']})
+                    return  {'flag' : True , 'name' : new_yearr.json()['name'] , 'id' : new_yearr.json()['id']}
                 else :
-                    return  {'flag' : False , 'name' : name , 'id' : new_actor.json()['data']['term_id']}
+                    return  {'flag' : False , 'name' : name , 'id' : new_yearr.json()['data']['term_id']}
         
 
 

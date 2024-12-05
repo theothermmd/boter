@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from libs.func import getAllTitles_movie, get_movie_data , get_Actors , get_Directors , media_gen , get_ganres , get_country , get_Actors_as_list , get_Directors_as_list , get_genres_as_list , get_country_as_list
+from libs.func import getAllTitles_movie, get_movie_data , get_yearr , get_year_as_list , media_gen , get_ganres , get_country ,   get_genres_as_list , get_country_as_list
 from io import BytesIO
 from tqdm import tqdm
 from colorama import Fore, Style
@@ -23,7 +23,6 @@ categories =  { "animation": 8775 , "irani_berooz": 8898 , "irani": 7558 , "dubb
 score =  { "۰ تا ۲": 145 , "۲ تا ۵": 146 , "۵ تا ۷": 147 , "بالای ۷": 148 }
 rate = { "G": 4082 , "PG": 8900 , "PG-13": 8901 , "R": 136 }
 
-years = { "1932" : 7808, "1938" : 7829, "1956" : 7845, "1961" : 7862, "1968" : 4081, "1971" : 8870, "1972" : 314 , "1973" : 4252, "1974" : 1085, "1975" : 6672, "1976" : 4102, "1979" : 6692, "1980" : 164 , "1981" : 165 , "1982" : 166 , "1983" : 167 , "1984" : 168 , "1985" : 169 , "1986" : 170 , "1987" : 171 , "1988" : 172 , "1989" : 173 , "1990" : 174 , "1991" : 175 , "1992" : 176 , "1993" : 177 , "1994" : 178 , "1995" : 179 , "1996" : 180 , "1997" : 181 , "1998" : 182 , "1999" : 183 , "2000" : 184 , "2001" : 185 , "2002" : 186 , "2003" : 187 , "2004" : 188 , "2005" : 189 , "2006" : 190 , "2007" : 191 , "2008" : 192 , "2009" : 193 , "2010" : 194 , "2011" : 195 , "2012" : 196 , "2013" : 197 , "2014" : 2713, "2015" : 199 , "2016" : 200 , "2017" : 201 , "2018" : 202 , "2019" : 203 , "2020" : 204 , "2021" : 205 , "2022" : 1677, "2023" : 2496, "2024" : 2498, "2025" : 8993}
 
 if not os.path.isfile('movie_data_movie.json'): getAllTitles_movie()
 
@@ -33,8 +32,7 @@ with open("movie_data_movie.json", "r", encoding="utf-8") as request_getAllTitle
 
 y = {"erros_name_movie": []}
 
-actors_list = get_Actors_as_list()
-directors_list = get_Directors_as_list()
+years = get_year_as_list()
 countrys_list = get_country_as_list()
 genres_list = get_genres_as_list()
 
@@ -442,7 +440,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 if lang == "زبان فارسی" :
                     lang = "فارسی"
                 send_data = {
-                        "yearr": years[str(movie_data['year'])],
+                        "yearr": [get_yearr(str(movie_data['year']) , years)['id']],
                         "type_of_post": [ 995 ],
                         "title": movie_data['name_fa'],
                         "content": "",
