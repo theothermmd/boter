@@ -147,7 +147,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 apikeys = ['8812c608' , '6273c114' , '8812c608' , '42a575eb' , '54a50e39']
                 count = 0
                 apikey = apikeys[count]
-                if movie_data['isirani'] != 1 and movie_data['imdb'] != None and movie_data['imdb'] != "":
+                if movie_data['isirani'] != 1 and movie_data['imdb'] != None and movie_data['imdb'] != "" :
                     for attempt in range(3):
                         try:
                             imdb_data = requests.get( f"http://www.omdbapi.com/?i={movie_data['imdb']}&apikey={apikey}", headers=headers, timeout=30).json()
@@ -171,7 +171,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 else :
                                     country.append(get_country(str(imdb_data['Country']) , countrys_list)['id'])
                     except :
-                            print(apikey)
+                            print(imdb_data.text)
                             break
                     
                 else :
