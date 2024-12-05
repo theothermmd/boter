@@ -153,10 +153,10 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     for attempt in range(3):
                         try:
                             imdb_data = requests.get( f"http://www.omdbapi.com/?i={movie_data['imdb']}&apikey={apikey}", headers=headers, timeout=30).json()
+                            if imdb_data.get("Error") :
+                                count += 1
                             break
                         except:
-                            if attempt == 2 :
-                                apikey = apikeys[count + 1]
                             continue
                     try :
                             if imdb_data['Country'] != "N/A" :
