@@ -136,12 +136,14 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                 genres = []
                 for i in str(movie_data['genre']).split(",") :
-                        ls = get_ganres(i.strip() , genres_list)
+                        
+                        if i != "" :
+                            ls = get_ganres(i.strip() , genres_list)
 
-                        if ls['flag'] == True :
-                                genres_list.append({'name' : ls['name'] , 'id' : ls['id']})
+                            if ls['flag'] == True :
+                                    genres_list.append({'name' : ls['name'] , 'id' : ls['id']})
 
-                        genres.append(ls['id'])
+                            genres.append(ls['id'])
 
                 country = []
                 apikeys = ['8812c608' , '6273c114' , '8812c608' , '42a575eb' , '54a50e39']
