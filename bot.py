@@ -155,21 +155,24 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         except:
                             if attempt ==2 :
                                 apikey = apikeys[count + 1]
-
                             continue
-                    if imdb_data['Country'] != "N/A" :
-                        if "," in imdb_data['Country'] :
-                            
-                            for i in str(imdb_data['Country']).split(",") :
-                                ls = get_country(i.strip() , countrys_list)
+                    try :
+                            if imdb_data['Country'] != "N/A" :
+                                if "," in imdb_data['Country'] :
+                                    
+                                    for i in str(imdb_data['Country']).split(",") :
+                                        ls = get_country(i.strip() , countrys_list)
 
-                                if ls['flag'] == True :
-                                    countrys_list.append({'name' : ls['name'] , 'id' : ls['id']})
+                                        if ls['flag'] == True :
+                                            countrys_list.append({'name' : ls['name'] , 'id' : ls['id']})
 
-                                country.append(ls['id'])
+                                        country.append(ls['id'])
 
-                        else :
-                            country.append(get_country(str(imdb_data['Country']) , countrys_list)['id'])
+                                else :
+                                    country.append(get_country(str(imdb_data['Country']) , countrys_list)['id'])
+                    except :
+                            print(apikey)
+                            break
                     
                 else :
                     country.append(117)
