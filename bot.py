@@ -46,6 +46,9 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
     progress_bar.set_description(f"{Fore.CYAN}Processing{Style.RESET_ALL}")
     
     for movie in rev:
+        count += 1
+        if count == 4 :
+            count = 0
         try :
             movie_data = get_movie_data(movie)
         except :
@@ -146,21 +149,18 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             genres.append(ls['id'])
 
                 country = []
-                apikeys = ['8812c608' , '6273c114' , '8812c608' , '42a575eb' , '54a50e39']
+                apikeys = ['6273c114' , '8812c608' , '42a575eb' , '54a50e39']
                 apikey = apikeys[count]
                 if movie_data['isirani'] != 1 and movie_data['imdb'] != None and movie_data['imdb'] != "" :
                     for attempt in range(3):
                         try:
                             imdb_data = requests.get( f"http://www.omdbapi.com/?i={movie_data['imdb']}&apikey={apikey}", headers=headers, timeout=30).json()
-                            if "Error" in imdb_data:
-                                count += 1
-                                continue
-                            else :
-                                break
+                            break
+
                         except:
                             continue
-                    try :
-                            if imdb_data['Country'] != "N/A" :
+                    
+                    if imdb_data['Country'] != "N/A" :
                                 if "," in imdb_data['Country'] :
                                     
                                     for i in str(imdb_data['Country']).split(",") :
@@ -173,8 +173,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                                 else :
                                     country.append(get_country(str(imdb_data['Country']) , countrys_list)['id'])
-                    except :
-                            input(imdb_data)
+
                             
                     
                 else :
