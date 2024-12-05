@@ -171,7 +171,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 else :
                                     country.append(get_country(str(imdb_data['Country']) , countrys_list)['id'])
                     except :
-                            print(imdb_data.text)
+                            print(imdb_data)
                             break
                     
                 else :
