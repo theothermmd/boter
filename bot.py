@@ -63,6 +63,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
         if poster['status'] == True:
             backdrop = media_gen( poster_url=movie_data['cdn_backdrop'] , poster_name=movie_data['backdrop'] )
             if backdrop['status'] == True:
+                
                 categorie = []
                 if movie_data['isirani'] == 1:
                     categorie.append(categories['irani'])
@@ -71,9 +72,12 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         if "Animation" in movie_data['genre']:
                             categorie.append(categories['animation'])
                         else:
-                            if movie_data['isdoubble'] == 1 and movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" : 
+                            if movie_data['isdoubble'] == 1 and movie_data['sub'] : 
                                 categorie.append(categories['dubble'])
                                 categorie.append(categories['zirnevis'])
+                            else :
+                                if movie_data['isdoubble'] == 1 :
+                                    categorie.append(categories['dubble'])
                     else:
                         if movie_data['isdoubble'] == 0 and movie_data['dl_datials']['sub_links']['dl_480']['size'] != "":
                             if "Animation" in movie_data['genre']:
