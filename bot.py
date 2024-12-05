@@ -130,16 +130,8 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 
 
 
-                
+            
 
-
-                if movie_data['isirani'] != 1:
-                    for attempt in range(3):
-                        try:
-                            imdb_data = requests.get( f"http://www.omdbapi.com/?i={movie_data['imdb']}&apikey=9c7534d4", headers=headers, timeout=30).json()
-                            break
-                        except:
-                            continue
 
 
                 genres = []
@@ -152,7 +144,19 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         genres.append(ls['id'])
 
                 country = []
+                apikeys = ['8812c608' , '6273c114' , '8812c608' , '42a575eb' , '54a50e39']
+                count = 0
+                apikey = apikeys[count]
                 if movie_data['isirani'] != 1 :
+                    for attempt in range(3):
+                        try:
+                            imdb_data = requests.get( f"http://www.omdbapi.com/?i={movie_data['imdb']}&apikey={apikey}", headers=headers, timeout=30).json()
+                            break
+                        except:
+                            if attempt ==2 :
+                                apikey = apikeys[count + 1]
+
+                            continue
                     if imdb_data['Country'] != "N/A" :
                         if "," in imdb_data['Country'] :
                             
