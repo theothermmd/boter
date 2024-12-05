@@ -6,7 +6,7 @@ from io import BytesIO
 from tqdm import tqdm
 from colorama import Fore, Style
 count = 0
-apikeys = ['6273c114'  , '42a575eb' , '54a50e39']
+apikeys = ['6273c114'  , '42a575eb']
 bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZvZC50YXJpbmV0LmlyIiwiaWF0IjoxNzMzMTY0ODg2LCJuYmYiOjE3MzMxNjQ4ODYsImV4cCI6MTczMzc2OTY4NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.c1NIRwSq2rmFeIZ-OBS7hu32TuD1GwSqwUVPPCVB3To"
 cdn : dict = {
     "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/",
@@ -48,7 +48,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
     
     for movie in rev:
         count += 1
-        if count == 4 :
+        if count == 2 :
             count = 0
         try :
             movie_data = get_movie_data(movie)
