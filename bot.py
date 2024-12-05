@@ -432,7 +432,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 else :
                     type_file = "فیلم"
                 countryyy = ''
-                if movie_data['isirani'] != 1 :
+                if movie_data['isirani'] != 1 and movie_data['imdb'] != None and movie_data['imdb'] != "": 
                     if imdb_data['Country'] != "N/A" :
                         countryyy = imdb_data['Country'] 
                 else :
