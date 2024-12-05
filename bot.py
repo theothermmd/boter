@@ -155,11 +155,12 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             if "Error" in imdb_data:
                                 count += 1
                                 continue
-                            break
+                            else :
+                                break
                         except:
                             continue
-                    try :
-                            if imdb_data['Country'] != "N/A" :
+                    
+                    if imdb_data['Country'] != "N/A" :
                                 if "," in imdb_data['Country'] :
                                     
                                     for i in str(imdb_data['Country']).split(",") :
@@ -172,8 +173,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                                 else :
                                     country.append(get_country(str(imdb_data['Country']) , countrys_list)['id'])
-                    except :
-                            country = []
+
                             
                     
                 else :
