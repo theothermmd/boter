@@ -171,7 +171,6 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         "genre" : genres,
                         "acf": {
                             "Language" : lang,
-                            "serial-dl": movie_data['serialdl'],
                             "about" : about,
                             "quality-meta" : quality_meta,
                             "en_title" : movie_data['name'],
@@ -284,7 +283,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         print("test 4")
                         db_post_backdrop['data'].append( {movie_data['id']:  {"post_id": post_id, "poster_id": poster['media_id']}})
                         print("test 5")
-                        response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=30)
+                        response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json= { "acf": {"serial-dl": movie_data['serialdl'] }}, timeout=30)
                         print("test 6")
                         progress_bar.update(1)
                 else:
