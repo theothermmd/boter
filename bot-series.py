@@ -54,11 +54,26 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
         try :
             movie_data = get_series_data(movie['id'])
             if movie_data == None :
-                err_total.append(movie['id'])
+
+                with open('errors_total.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
+                    errors_total = json.load( request_getAllTitles_json_final_load3)
+
+                errors_total.append(movie['id'])
+
+                with open('errors_total.json', 'w', encoding='UTF-8') as file:
+                    file.write(json.dumps(errors_total, ensure_ascii=False))
                 progress_bar.update(1)
                 continue
+            with open('errors_eisodes_nazashte.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load4:
+                    errors_nazade = json.load( request_getAllTitles_json_final_load4)
+            errors_nazade.append(movie_data['erros'])
+            with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
+                file.write(json.dumps(errors_nazade, ensure_ascii=False))
+
         except :
             err_total.append(movie['id'])
+            with open('errors_total.json', 'w', encoding='UTF-8') as file:
+                file.write(json.dumps(err_total, ensure_ascii=False))
             progress_bar.update(1)
             continue
 
@@ -296,12 +311,6 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
 with open('errors.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(y, ensure_ascii=False))
-
-with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
-    file.write(json.dumps(ers, ensure_ascii=False))
-
-with open('errors_total.json', 'w', encoding='UTF-8') as file:
-    file.write(json.dumps(err_total, ensure_ascii=False))
 
 with open('poster.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(db_post_backdrop, ensure_ascii=False))
