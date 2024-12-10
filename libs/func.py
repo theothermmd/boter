@@ -565,7 +565,7 @@ cdn : dict = { "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=http
 
 
 
-getAllTitles_movie()
+getAllTitles_series()
 
 
 def get_series_data(id : dict) -> dict:
@@ -592,7 +592,7 @@ def get_series_data(id : dict) -> dict:
 
     age: str = request_series_data['age']
 
-    with open('/root/boter/libs/movie_data_series.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    with open('movie_data_series.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
     runtime = 0
     ctn = 0
