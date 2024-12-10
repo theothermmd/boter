@@ -632,11 +632,15 @@ def get_series_data(id : dict) -> dict:
                     }
                 request_data_json = requestz.json()
                 for atn in range(3) :
-                    if 'data' not in request_data_json :
-                        requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'})
-                        request_data_json = requestz.json()
-                    else :
-                        break
+                    try :
+                        if 'data' not in request_data_json :
+                            requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'})
+                            request_data_json = requestz.json()
+                            continue
+                        else :
+                            break
+                    except :
+                        continue
                 for i in request_data_json['data']['links']:
                                 if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
                                     if "480" in i['title']:
