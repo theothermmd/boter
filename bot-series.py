@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from libs.func import  get_yearr , get_year_as_list , media_gen , get_ganres , get_genres_as_list , get_country_as_list, get_series_data
+from libs.func import  get_yearr , get_year_as_list , media_gen , get_ganres , get_genres_as_list , get_series_data
 from io import BytesIO
 from tqdm import tqdm
 from colorama import Fore, Style
@@ -297,7 +297,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     post_id = response.json()["id"]
                     for attempt in range(3):
                         try:
-                            response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=30)
+                            response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=40)
                             break
                         except:
                             y['erros_name_movie'].append( movie_data['name_fa'])
@@ -308,7 +308,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
  
                         for attempt in range(3):
                             try:
-                                response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json= { "acf": {"serial-dl": movie_data['serialdl'] }}, timeout=120)
+                                response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json= { "acf": {"serial-dl": movie_data['serialdl'] }}, timeout=150)
                                 break
                             except :
                                 continue

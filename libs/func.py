@@ -633,7 +633,7 @@ def get_series_data(id : dict) -> dict:
         next_item['episode-count'] = f"{len(request['data']['season'][j])} قسمت"
         for w , counter in zip(request['data']['season'][j] , range(1 , len(request['data']['season'][j]) + 1)) :
                 
-                requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'})
+                requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'} , timeout=30)
                 dl_datails = {
                     "dub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, },
                     "sub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, }
