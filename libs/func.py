@@ -569,7 +569,12 @@ cdn : dict = { "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=http
 
 
 def get_series_data(id : dict) -> dict:
-    request= requests.get(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'}).json()
+    for attempt in range(3):
+        try:
+            request= requests.get(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'} , timeout=30).json()
+            break
+        except :
+            continue   
     try :
         request_series_data = request['data']['series']
     except :

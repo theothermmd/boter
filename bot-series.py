@@ -1,7 +1,7 @@
 import requests
 import json
 import os
-from libs.func import getAllTitles_movie, get_movie_data , get_yearr , get_year_as_list , media_gen , get_ganres , get_country ,   get_genres_as_list , get_country_as_list, get_series_data
+from libs.func import  get_yearr , get_year_as_list , media_gen , get_ganres , get_genres_as_list , get_country_as_list, get_series_data
 from io import BytesIO
 from tqdm import tqdm
 from colorama import Fore, Style
@@ -35,7 +35,6 @@ with open("series.json", "r", encoding="utf-8") as request_getAllTitles_json_fin
 y = {"erros_name_movie": []}
 
 years = get_year_as_list()
-countrys_list = get_country_as_list()
 genres_list = get_genres_as_list()
 
 db_post_backdrop = {"data": []}
@@ -53,27 +52,39 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             count = 0
         try :
             movie_data = get_series_data(movie['id'])
+
             if movie_data == None :
 
-                with open('errors_total.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
-                    errors_total = json.load( request_getAllTitles_json_final_load3)
+                with open('errors_total_none.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
+                    errors_total_none = json.load( request_getAllTitles_json_final_load3)
 
-                errors_total.append(movie['id'])
+                errors_total_none.append(movie['id'])
 
-                with open('errors_total.json', 'w', encoding='UTF-8') as file:
-                    file.write(json.dumps(errors_total, ensure_ascii=False))
+                with open('errors_total_none.json', 'w', encoding='UTF-8') as file:
+                    file.write(json.dumps(errors_total_none, ensure_ascii=False))
                 progress_bar.update(1)
                 continue
-            with open('errors_eisodes_nazashte.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load4:
-                    errors_nazade = json.load( request_getAllTitles_json_final_load4)
-            errors_nazade.append(movie_data['erros'])
-            with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
-                file.write(json.dumps(errors_nazade, ensure_ascii=False))
+
+            if movie_data['erros'] != [] :
+                with open('errors_eisodes_nazashte.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load4:
+                        errors_nazade = json.load( request_getAllTitles_json_final_load4)
+
+                errors_nazade.append(movie_data['erros'])
+                
+                with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
+                    file.write(json.dumps(errors_nazade, ensure_ascii=False))
 
         except :
             err_total.append(movie['id'])
+            with open('errors_total.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
+                errors_total = json.load( request_getAllTitles_json_final_load3)
+
+            errors_total.append(movie['id'])
+
             with open('errors_total.json', 'w', encoding='UTF-8') as file:
-                file.write(json.dumps(err_total, ensure_ascii=False))
+                file.write(json.dumps(errors_total, ensure_ascii=False))
+
+
             progress_bar.update(1)
             continue
 
