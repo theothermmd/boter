@@ -260,7 +260,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                 for attempt in range(3):
                     try:
-                        print("test")
+                        print("test 1")
                         response = requests.post( "https://moviepix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=240)
                         break
                     except:
@@ -270,17 +270,22 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 
                 if response.status_code == 200 or response.status_code == 201:
                     post_id = response.json()["id"]
+                    print("test 2")
                     for attempt in range(3):
                         try:
-                            response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=15)
+                            response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=30)
                             break
                         except:
                             y['erros_name_movie'].append(
                                 movie_data['name_fa'])
                             continue
+                    print("test 3")
                     if response.status_code == 200:
+                        print("test 4")
                         db_post_backdrop['data'].append( {movie_data['id']:  {"post_id": post_id, "poster_id": poster['media_id']}})
-                        response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=15)
+                        print("test 5")
+                        response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=30)
+                        print("test 6")
                         progress_bar.update(1)
                 else:
                     print("Failed to update post:", response.text)
