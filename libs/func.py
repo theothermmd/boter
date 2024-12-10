@@ -608,10 +608,17 @@ def get_series_data(id : dict) -> dict:
     seasons_names : dict = {'1' : 'فصل اول','2' : 'فصل دوم','3' : 'فصل سوم','4' : 'فصل چهارم','5' : 'فصل پنجم','6' : 'فصل ششم','7' : 'فصل هفتم','8' : 'فصل هشتم','9' : 'فصل نهم','10' : 'فصل دهم','11' : 'فصل یازدهم','12' : 'فصل دوازدهم','13' : 'فصل سیزدهم','14' : 'فصل چهاردهم','15' : 'فصل پانزدهم','16' : 'فصل شانزدهم', }
     seasons : dict = {}
     serialdl : list = []
-    for x in request['data']['season'].keys() :
-        seasons[x] = []
-        serialdl.append({"season-name": seasons_names[x] + " - دوبله فارسی", "episode-count": "",  "dl-links" : [] })
-        serialdl.append({"season-name": seasons_names[x] + " - زیرنویس فارسی", "episode-count": "",  "dl-links" : [] })
+    if isirani != 1 :
+
+        for x in request['data']['season'].keys() :
+            seasons[x] = []
+            serialdl.append({"season-name": seasons_names[x] + " - دوبله فارسی", "episode-count": "",  "dl-links" : [] })
+            serialdl.append({"season-name": seasons_names[x] + " - زیرنویس فارسی", "episode-count": "",  "dl-links" : [] })
+    else :
+        for x in request['data']['season'].keys() :
+            seasons[x] = []
+            serialdl.append({"season-name": seasons_names[x], "episode-count": "",  "dl-links" : [] })
+            serialdl.append({"season-name": seasons_names[x], "episode-count": "",  "dl-links" : [] })
     
     for j, (serial, next_item) in zip(seasons.keys(), zip(serialdl[::2], serialdl[1::2])):
         serial['episode-count'] = f"{len(request['data']['season'][j])} قسمت"
