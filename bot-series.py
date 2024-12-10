@@ -5,6 +5,7 @@ from libs.func import getAllTitles_movie, get_movie_data , get_yearr , get_year_
 from io import BytesIO
 from tqdm import tqdm
 from colorama import Fore, Style
+ers = {}
 count = 0
 apikeys = ['6273c114'  , '42a575eb' , "7dd47dfa" , "57ebdc94"]
 bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzMzNzQzMDQ2LCJuYmYiOjE3MzM3NDMwNDYsImV4cCI6MTczNjMzNTA0NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.3nhDfqRZ7BbdCg7cCcO1j_uBvR4LcO3j5LqEswO5gX0"
@@ -278,6 +279,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 break
                             except :
                                 continue
+                        ers[movie_data['name']] = movie_data['erros']
                         progress_bar.update(1)
                 else:
                     print("Failed to update post:", response.text)
@@ -288,6 +290,8 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 with open('errors.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(y, ensure_ascii=False))
 
+with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
+    file.write(json.dumps(ers, ensure_ascii=False))
 
 with open('poster.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(db_post_backdrop, ensure_ascii=False))

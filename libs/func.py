@@ -604,7 +604,7 @@ def get_series_data(id : dict) -> dict:
     isirani: int = request_series_data['ir']
 
     isdoubble: int = request_series_data['persian']
-
+    erros = []
     seasons_names : dict = {'1' : 'فصل اول','2' : 'فصل دوم','3' : 'فصل سوم','4' : 'فصل چهارم','5' : 'فصل پنجم','6' : 'فصل ششم','7' : 'فصل هفتم','8' : 'فصل هشتم','9' : 'فصل نهم','10' : 'فصل دهم','11' : 'فصل یازدهم','12' : 'فصل دوازدهم','13' : 'فصل سیزدهم','14' : 'فصل چهاردهم','15' : 'فصل پانزدهم','16' : 'فصل شانزدهم', }
     seasons : dict = {}
     serialdl : list = []
@@ -663,7 +663,8 @@ def get_series_data(id : dict) -> dict:
                                             dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
                                             dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
                 except :
-                    input(w['id'])       
+                    erros.append(w['id'])
+                    continue    
                 for i in request_data_json['data']['links']:
                             if i['type'] == "traffic" and "IFRAME" not in i['title'] :
                                 if "480" in i['title'] and "زیرنویس" in i['title']:
@@ -768,7 +769,8 @@ def get_series_data(id : dict) -> dict:
         "isdoubble": isdoubble,
         "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False,
         "serialdl": serialdl,
-        "seasons" : seasons
+        "seasons" : seasons,
+        "erros"  : erros
     }
 
 

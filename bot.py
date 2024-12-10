@@ -131,12 +131,6 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     lang = "زبان اصلی با زیرنویس فارسی"
                 elif movie_data['dl_datials']['sub_links']['dl_480']['size'] != "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] != "":
                     lang = "دوبله فارسی + زبان اصلی"
-                
-
-
-            
-
-
 
                 genres = []
                 for i in str(movie_data['genre']).split(",") :
