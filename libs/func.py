@@ -641,27 +641,29 @@ def get_series_data(id : dict) -> dict:
                             break
                     except :
                         continue
-                for i in request_data_json['data']['links']:
-                                if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
-                                    if "480" in i['title']:
-                                        dl_datails['dub_links']["dl_480"]["dl_lnk"] = i['link']
-                                        dl_datails['dub_links']["dl_480"]["size"] = i['size']
-                                    elif "720" in i['title']:
-                                        dl_datails['dub_links']["dl_720"]["dl_lnk"] = i['link']
-                                        dl_datails['dub_links']["dl_720"]["size"] = i['size']
-                                    elif "کیفیت 1080" in i['title']:
-                                        dl_datails['dub_links']["dl_1080"]["dl_lnk"] = i['link']
-                                        dl_datails['dub_links']["dl_1080"]["size"] = i['size']
-                                    elif "کیفیت HQ_1080" in i['title']:
-                                        dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
-                                        dl_datails['dub_links']["dl_HQ_1080"]["size"] = i['size']
-                                    elif "BLURAY" in i['title']:
-                                        dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
-                                        dl_datails['dub_links']["dl_BLURAY"]["size"] = i['size']
-                                    elif "HLS" in i['title'] :
-                                        dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
-                                        dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
-                                        
+                try :
+                    for i in request_data_json['data']['links']:
+                                    if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
+                                        if "480" in i['title']:
+                                            dl_datails['dub_links']["dl_480"]["dl_lnk"] = i['link']
+                                            dl_datails['dub_links']["dl_480"]["size"] = i['size']
+                                        elif "720" in i['title']:
+                                            dl_datails['dub_links']["dl_720"]["dl_lnk"] = i['link']
+                                            dl_datails['dub_links']["dl_720"]["size"] = i['size']
+                                        elif "کیفیت 1080" in i['title']:
+                                            dl_datails['dub_links']["dl_1080"]["dl_lnk"] = i['link']
+                                            dl_datails['dub_links']["dl_1080"]["size"] = i['size']
+                                        elif "کیفیت HQ_1080" in i['title']:
+                                            dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
+                                            dl_datails['dub_links']["dl_HQ_1080"]["size"] = i['size']
+                                        elif "BLURAY" in i['title']:
+                                            dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
+                                            dl_datails['dub_links']["dl_BLURAY"]["size"] = i['size']
+                                        elif "HLS" in i['title'] :
+                                            dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
+                                            dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
+                except :
+                    input(request_data_json)       
                 for i in request_data_json['data']['links']:
                             if i['type'] == "traffic" and "IFRAME" not in i['title'] :
                                 if "480" in i['title'] and "زیرنویس" in i['title']:
