@@ -128,12 +128,6 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     lang = "زبان اصلی با زیرنویس فارسی"
                 elif movie_data['dl_datials']['sub_links']['dl_480']['size'] != "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] != "":
                     lang = "دوبله فارسی + زبان اصلی"
-                
-
-
-            
-
-
 
                 genres = [] 
                 for i in str(movie_data['genre']).split(",") :
@@ -207,7 +201,6 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             "story": movie_data['overview_fa'],
                             "en_title": movie_data['name'],
                             "persian-doble": True if movie_data['isdoubble'] == 1 and movie_data['isirani'] == 0 else False,
-                            "mobile_online": movie_data['dl_datials']['dub_links']['dl_HLS']['dl_lnk'] if movie_data['dl_datials']['dub_links']['dl_HLS']['dl_lnk'] != "" else movie_data['dl_datials']['sub_links']['dl_480']['dl_lnk'],
                             "categories": categorie,
                             "censored": True if movie_data['isirani'] == 0 else False,
                             "playonline": True,

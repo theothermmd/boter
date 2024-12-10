@@ -630,7 +630,12 @@ def get_series_data(id : dict) -> dict:
                     "dub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, },
                     "sub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, }
                     }
-                request_data_json = requestz.json()
+                for atn in range(3) :
+                    if 'data' not in request_data_json :
+                        requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'})
+                        request_data_json = requestz.json()
+                    else :
+                        break
                 for i in request_data_json['data']['links']:
                                 if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
                                     if "480" in i['title']:
@@ -691,7 +696,7 @@ def get_series_data(id : dict) -> dict:
                         "online_link_480": "",
                         "online_link_720": "",
                         "online_link_1080": "",
-                        "serial_480": "",
+                        "serial_480": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
                         "serial_720": "",
                         "serial_1080": "",
                         "quality" : [
@@ -718,7 +723,7 @@ def get_series_data(id : dict) -> dict:
                         "online_link_480": "",
                         "online_link_720": "",
                         "online_link_1080": "",
-                        "serial_480": "",
+                        "serial_480": dl_datails['sub_links']["dl_HLS"]["dl_lnk"],
                         "serial_720": "",
                         "serial_1080": "",
                         "quality" : [
