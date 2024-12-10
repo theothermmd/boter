@@ -287,7 +287,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                 for attempt in range(3):
                     try:
-                        response = requests.post( "https://moviepix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=120)
+                        response = requests.post( "https://moviepix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=40)
                         break
                     except:
                         y['erros_name_movie'].append(movie_data['name_fa'])
@@ -306,12 +306,16 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                         db_post_backdrop['data'].append( {movie_data['id']:  {"post_id": post_id, "poster_id": poster['media_id']}})
  
-                        for attempt in range(3):
+                        for attempt in range(5):
                             try:
-                                response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json= { "acf": {"serial-dl": movie_data['serialdl'] }}, timeout=150)
-                                break
+                                response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json= { "acf": {"serial-dl": movie_data['serialdl'] }}, timeout=240)
+                                if response.status_code == 200 :
+                                    break
+                                else :
+                                    continue
                             except :
                                 continue
+                            
                         ers[movie_data['name']] = movie_data['erros']
                         progress_bar.update(1)
                 else:
