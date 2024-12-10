@@ -25,8 +25,6 @@ score =  { "۰ تا ۲": 145 , "۲ تا ۵": 146 , "۵ تا ۷": 147 , "بالا
 rate = { "G": 4082 , "PG": 8900 , "PG-13": 8901 , "R": 136 }
 
 
-if not os.path.isfile('movie_data_movie.json'): getAllTitles_movie()
-
 with open("series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
     request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)['data']
 
@@ -52,8 +50,10 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             count = 0
         try :
             movie_data = get_series_data(movie['id'])
-        except :
+        except Exception as e :
+            input(e)
             progress_bar.update(1)
+
             continue
 
         if movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] == "":
