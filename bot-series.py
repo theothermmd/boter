@@ -6,6 +6,7 @@ from io import BytesIO
 from tqdm import tqdm
 from colorama import Fore, Style
 ers = {}
+err_total = []
 count = 0
 apikeys = ['6273c114'  , '42a575eb' , "7dd47dfa" , "57ebdc94"]
 bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzMzNzQzMDQ2LCJuYmYiOjE3MzM3NDMwNDYsImV4cCI6MTczNjMzNTA0NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.3nhDfqRZ7BbdCg7cCcO1j_uBvR4LcO3j5LqEswO5gX0"
@@ -50,9 +51,15 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
         count += 1
         if count == 4 :
             count = 0
-        
-        movie_data = get_series_data(movie['id'])
-        if movie_data == None :
+        try :
+            movie_data = get_series_data(movie['id'])
+            if movie_data == None :
+                err_total.append(movie['id'])
+                progress_bar.update(1)
+                continue
+        except :
+            err_total.append(movie['id'])
+            progress_bar.update(1)
             continue
 
         if movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] == "":
@@ -267,8 +274,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             response = requests.put(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=30)
                             break
                         except:
-                            y['erros_name_movie'].append(
-                                movie_data['name_fa'])
+                            y['erros_name_movie'].append( movie_data['name_fa'])
                             continue
                     if response.status_code == 200:
 
@@ -293,6 +299,9 @@ with open('errors.json', 'w', encoding='UTF-8') as file:
 
 with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(ers, ensure_ascii=False))
+
+with open('errors_total.json', 'w', encoding='UTF-8') as file:
+    file.write(json.dumps(err_total, ensure_ascii=False))
 
 with open('poster.json', 'w', encoding='UTF-8') as file:
     file.write(json.dumps(db_post_backdrop, ensure_ascii=False))
