@@ -245,7 +245,7 @@ request_getAllTitles_json_final = {"title": "Example"}
 current_directory = os.getcwd()
 
 # مسیر فایل
-file_path = os.path.join(current_directory, 'movie_data_series.json')
+file_path = os.path.join(current_directory , "libs", 'movie_data_series.json')
 
 def getAllTitles_movie() -> None :
     
