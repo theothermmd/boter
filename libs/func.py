@@ -570,8 +570,11 @@ cdn : dict = { "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=http
 
 def get_series_data(id : dict) -> dict:
     request= requests.get(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'}).json()
-
-    request_series_data = request['data']['series']
+    try :
+        request_series_data = request['data']['series']
+    except :
+        return None
+    
     name: str = request_series_data['name']
     name_fa: str = request_series_data['name_fa']
 
