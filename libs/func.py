@@ -235,17 +235,6 @@ def get_movie_data(movie_json_file : dict) -> dict:
         "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False
     }
 
-import os
-import json
-
-# داده‌ای که می‌خواهید ذخیره کنید
-request_getAllTitles_json_final = {"title": "Example"}
-
-# گرفتن مسیر فعلی (جایی که اسکریپت اجرا می‌شود)
-current_directory = os.getcwd()
-
-# مسیر فایل
-file_path = os.path.join(current_directory , "libs", 'movie_data_series.json')
 
 def getAllTitles_movie() -> None :
     
@@ -266,7 +255,7 @@ def getAllTitles_series() -> None :
 
     request_getAllTitles_json_final : list = request_getAllTitles_json['data']['all_titles']['data']
 
-    with open(file_path, 'w', encoding='UTF-8') as file:
+    with open('/root/boter/libs/movie_data_series.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
     print("series getted.")
 
@@ -603,7 +592,7 @@ def get_series_data(id : dict) -> dict:
 
     age: str = request_series_data['age']
 
-    with open(file_path, "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    with open('/root/boter/libs/movie_data_series.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
     runtime = 0
     ctn = 0
