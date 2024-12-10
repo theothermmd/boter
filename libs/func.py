@@ -630,6 +630,7 @@ def get_series_data(id : dict) -> dict:
                     "dub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, },
                     "sub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, }
                     }
+                request_data_json = requestz.json()
                 for atn in range(3) :
                     if 'data' not in request_data_json :
                         requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'})
