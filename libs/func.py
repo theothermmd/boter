@@ -266,7 +266,7 @@ def getAllTitles_series() -> None :
 
     request_getAllTitles_json_final : list = request_getAllTitles_json['data']['all_titles']['data']
 
-    with open('movie_data_series.json', 'w', encoding='UTF-8') as file:
+    with open(file_path, 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
     print("series getted.")
 
@@ -576,7 +576,7 @@ cdn : dict = { "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=http
 
 
 
-
+getAllTitles_movie()
 
 
 def get_series_data(id : dict) -> dict:
