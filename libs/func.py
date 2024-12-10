@@ -663,7 +663,7 @@ def get_series_data(id : dict) -> dict:
                                             dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
                                             dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
                 except :
-                    input(request_data_json)       
+                    input(w['id'])       
                 for i in request_data_json['data']['links']:
                             if i['type'] == "traffic" and "IFRAME" not in i['title'] :
                                 if "480" in i['title'] and "زیرنویس" in i['title']:
