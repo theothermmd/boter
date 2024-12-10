@@ -27,8 +27,8 @@ rate = { "G": 4082 , "PG": 8900 , "PG-13": 8901 , "R": 136 }
 
 if not os.path.isfile('movie_data_movie.json'): getAllTitles_movie()
 
-with open("movie_data_movie.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
-    request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
+with open("series_2.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)['names']
 
 
 y = {"erros_name_movie": []}
@@ -39,7 +39,7 @@ genres_list = get_genres_as_list()
 
 db_post_backdrop = {"data": []}
 
-rev = request_getAllTitles_json_file[::-1]
+rev = request_getAllTitles_json_file
 
 total_items = len(request_getAllTitles_json_file)
 
@@ -53,7 +53,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
         try :
             movie_data = get_movie_data(movie)
         except :
-            print("error")
+            progress_bar.update(1)
             continue
 
         if movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] == "":

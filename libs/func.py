@@ -248,10 +248,10 @@ def getAllTitles_movie() -> None :
     with open('movie_data_movie.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
     print("movie getted.")
-
+getAllTitles_movie()
 def getAllTitles_series() -> None :
     
-    request_getAllTitles = try_execute(requests.get( "https://seeko.film/api/v1/get/getAllTitles?f_type=series", headers={'Accept': 'application/json'}))
+    request_getAllTitles = requests.get( "https://seeko.film/api/v1/get/getAllTitles?f_type=series", headers={'Accept': 'application/json'})
 
     request_getAllTitles_json = request_getAllTitles.json()
 
@@ -558,4 +558,143 @@ def get_country(name: str , countrys : list):
         
 
 
+
+
+def get_series_data(id : dict) -> dict:
+    request = requests.post(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'}).json()
+
+    request_series_data = request['data']['series']
+    name: str = request_series_data['name']
+    name_fa: str = request_series_data['name_fa']
+
+    overview: str = request_series_data['overview']
+    overview_fa: str = request_series_data['overview_fa']
+
+    poster: str = request_series_data['poster']
+    cdn_poster: str = cdn["poster"] + poster
+
+    backdrop: str = request_series_data['backdrop']
+    cdn_backdrop: str = cdn["backdrop"] + backdrop
+
+    year: str = request_series_data['year']
+
+    genre: str = request_series_data['genre']
+
+    rate: str = request_series_data['rate']
+
+    age: str = request_series_data['age']
+
+    runtime: str = request_series_data['hour']
+
+    isirani: int = request_series_data['ir']
+
+    isdoubble: int = request_series_data['persian']
+    
+    request = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={id}&type=movie&ref={ref}", headers={ 'Accept': 'application/json'})
+
+
+    dl_datails = {
+        "dub_links" : {
+            "dl_480" : { "dl_lnk" : "" , "size" : "" },
+            "dl_720" : { "dl_lnk" : "" , "size" : "" },
+            "dl_1080" : { "dl_lnk" : "" , "size" : "" },
+            "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" },
+            "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" },
+            "dl_HLS" : { "dl_lnk" : "" , "size" : "" },
+
+       },
+        "sub_links" : {
+            "dl_480" : { "dl_lnk" : "" , "size" : "" },
+            "dl_720" : { "dl_lnk" : "" , "size" : "" },
+            "dl_1080" : { "dl_lnk" : "" , "size" : "" },
+            "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" },
+            "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" },
+            "dl_HLS" : { "dl_lnk" : "" , "size" : "" },
+        }
+
+        }
+    
+    request_data_json = request.json()
+    
+
+    for i in request_data_json['data']['links']:
+                
+                if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
+                    
+                    if "480" in i['title']:
+                        dl_datails['dub_links']["dl_480"]["dl_lnk"] = i['link']
+                        dl_datails['dub_links']["dl_480"]["size"] = i['size']
+
+                    elif "720" in i['title']:
+                        dl_datails['dub_links']["dl_720"]["dl_lnk"] = i['link']
+                        dl_datails['dub_links']["dl_720"]["size"] = i['size']
+
+                    elif "کیفیت 1080" in i['title']:
+                        dl_datails['dub_links']["dl_1080"]["dl_lnk"] = i['link']
+                        dl_datails['dub_links']["dl_1080"]["size"] = i['size']
+
+                    elif "کیفیت HQ_1080" in i['title']:
+                        dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
+                        dl_datails['dub_links']["dl_HQ_1080"]["size"] = i['size']
+
+                    elif "BLURAY" in i['title']:
+                        dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
+                        dl_datails['dub_links']["dl_BLURAY"]["size"] = i['size']
+
+                    elif "HLS" in i['title'] :
+                        dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
+                        dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
+            
+    for i in request_data_json['data']['links']:
+
+                if i['type'] == "traffic" and "IFRAME" not in i['title'] :
+                    
+                    if "480" in i['title'] and "زیرنویس" in i['title']:
+                        dl_datails['sub_links']["dl_480"]["dl_lnk"] = i['link']
+                        dl_datails['sub_links']["dl_480"]["size"] = i['size']
+
+                    elif "720" in i['title'] and "زیرنویس" in i['title']:
+                        dl_datails['sub_links']["dl_720"]["dl_lnk"] = i['link']
+                        dl_datails['sub_links']["dl_720"]["size"] = i['size']
+
+                    elif "کیفیت 1080" in i['title'] and "زیرنویس" in i['title']:
+                        dl_datails['sub_links']["dl_1080"]["dl_lnk"] = i['link']
+                        dl_datails['sub_links']["dl_1080"]["size"] = i['size']
+
+                    elif "کیفیت HQ_1080" in i['title'] and "زیرنویس" in i['title']:
+                        dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
+                        dl_datails['sub_links']["dl_HQ_1080"]["size"] = i['size']
+
+                    elif "BLURAY" in i['title'] and "زیرنویس" in i['title']:
+                        dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
+                        dl_datails['sub_links']["dl_BLURAY"]["size"] = i['size']
+                        
+                    elif "HLS" in i['title']:
+                        dl_datails['sub_links']["dl_HLS"]["dl_lnk"] = i['link']
+                        dl_datails['sub_links']["dl_HLS"]["size"] = i['size']
+
+
+
+
+    return {
+        "id": id,
+        "name": name,
+        "name_fa": name_fa,
+        "poster": poster,
+        "cdn_poster": cdn_poster,
+        "backdrop": backdrop,
+        "cdn_backdrop": cdn_backdrop,
+        "isirani": isirani,
+        "overview_fa": overview_fa,
+        "overview" : overview,
+        "year": year,
+        "genre": genre,
+        "rate": rate,
+        "age": age,
+        "imdb": imdb,
+        "runtime": runtime,
+        "dl_datials": dl_datails,
+        "isdoubble": isdoubble,
+        "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False
+    }
 
