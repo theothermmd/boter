@@ -8,7 +8,7 @@ from functools import wraps
 
 ref: int = 5198534
 
-bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZvZC50YXJpbmV0LmlyIiwiaWF0IjoxNzMzMTY0ODg2LCJuYmYiOjE3MzMxNjQ4ODYsImV4cCI6MTczMzc2OTY4NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.c1NIRwSq2rmFeIZ-OBS7hu32TuD1GwSqwUVPPCVB3To"
+bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzMzNzQzMDQ2LCJuYmYiOjE3MzM3NDMwNDYsImV4cCI6MTczNjMzNTA0NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.3nhDfqRZ7BbdCg7cCcO1j_uBvR4LcO3j5LqEswO5gX0"
 cdn : dict = {
     "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/",
     "backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/",
@@ -51,7 +51,7 @@ def get_Directors() :
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/director?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/director?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 continue
@@ -74,7 +74,7 @@ def get_Actors() :
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/actor?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/actor?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 continue
@@ -248,7 +248,6 @@ def getAllTitles_movie() -> None :
     with open('movie_data_movie.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
     print("movie getted.")
-getAllTitles_movie()
 def getAllTitles_series() -> None :
     
     request_getAllTitles = requests.get( "https://seeko.film/api/v1/get/getAllTitles?f_type=series", headers={'Accept': 'application/json'})
@@ -365,7 +364,7 @@ def media_gen(poster_url: str, poster_name: str) -> dict:
         for attempt in range(3):
             try:
                 upload_response = requests.post(
-                    "https://vod.tarinet.ir/wp-json/wp/v2/media", headers=headers, files=files, timeout=30)
+                    "https://moviepix.ir/wp-json/wp/v2/media", headers=headers, files=files, timeout=30)
                 break
             except:
                 if attempt == 2:
@@ -386,7 +385,7 @@ def get_year_as_list():
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/yearr?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/yearr?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -417,7 +416,7 @@ def get_yearr(name: str , actors : list):
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_yearr = requests.post( f"https://vod.tarinet.ir/wp-json/wp/v2/yearr", headers=headers,  json=data, timeout=30)
+                new_yearr = requests.post( f"https://moviepix.ir/wp-json/wp/v2/yearr", headers=headers,  json=data, timeout=30)
                 if new_yearr.status_code != 400 :
                     actors.append({'name' : name , 'id' : new_yearr.json()['id']})
                     return  {'flag' : True , 'name' : new_yearr.json()['name'] , 'id' : new_yearr.json()['id']}
@@ -432,7 +431,7 @@ def get_Directors_as_list() :
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/director?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/director?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -461,7 +460,7 @@ def get_Directors(name: str , directors : list):
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_director = requests.post( f"https://vod.tarinet.ir/wp-json/wp/v2/director", headers=headers,  json=data, timeout=30)
+                new_director = requests.post( f"https://moviepix.ir/wp-json/wp/v2/director", headers=headers,  json=data, timeout=30)
                 if new_director.status_code != 400 :
                     directors.append({'name' : name , 'id' : new_director.json()['id']})
                     return  {'flag' : True , "name" : new_director.json()['name'] , 'id' : new_director.json()['id']}
@@ -475,7 +474,7 @@ def get_genres_as_list() :
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/genre?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/genre?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -505,7 +504,7 @@ def get_ganres(name: str , ganres : list):
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_ganre = requests.post( f"https://vod.tarinet.ir/wp-json/wp/v2/genre", headers=headers,  json=data, timeout=30)
+                new_ganre = requests.post( f"https://moviepix.ir/wp-json/wp/v2/genre", headers=headers,  json=data, timeout=30)
                 if new_ganre.status_code != 400 :
                     ganres.append({'name' : name , 'id' : new_ganre.json()['id']})
                     return  {'flag' : True , "name" : new_ganre.json()['name'] , 'id' : new_ganre.json()['id']}
@@ -520,7 +519,7 @@ def get_country_as_list() :
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/country?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/country?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -549,7 +548,7 @@ def get_country(name: str , countrys : list):
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_country = requests.post( f"https://vod.tarinet.ir/wp-json/wp/v2/country", headers=headers,  json=data, timeout=30)
+                new_country = requests.post( f"https://moviepix.ir/wp-json/wp/v2/country", headers=headers,  json=data, timeout=30)
                 if new_country.status_code != 400 :
                     countrys.append({'name' : name , 'id' : new_country.json()['id']})
                     return  {'flag' : True , "name" : new_country.json()['name'] , 'id' : new_country.json()['id']}
@@ -560,8 +559,18 @@ def get_country(name: str , countrys : list):
 
 
 
+import requests
+ref: int = 5198534
+bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzMzNzQzMDQ2LCJuYmYiOjE3MzM3NDMwNDYsImV4cCI6MTczNjMzNTA0NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.3nhDfqRZ7BbdCg7cCcO1j_uBvR4LcO3j5LqEswO5gX0"
+cdn : dict = { "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/", "backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/", "lg_poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/", "lg_backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/", "md_poster": "https://s35.upera.net/thumb?w=337&h=500&q=90&src=https://s35.upera.net/s3/posters/", "md_backdrop": "https://s35.upera.net/thumb?w=382&h=200&q=90&src=https://s35.upera.net/s3/backdrops/", "sm_poster": "https://s35.upera.net/thumb?w=225&h=333&q=90&a=t&src=https://s35.upera.net/s3/posters/", "sm_backdrop": "https://s35.upera.net/thumb?w=191&h=100&q=90&src=https://s35.upera.net/s3/backdrops/" }
+
+
+
+
+
+
 def get_series_data(id : dict) -> dict:
-    request = requests.post(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'}).json()
+    request= requests.get(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'}).json()
 
     request_series_data = request['data']['series']
     name: str = request_series_data['name']
@@ -584,98 +593,143 @@ def get_series_data(id : dict) -> dict:
 
     age: str = request_series_data['age']
 
-    runtime: str = request_series_data['hour']
-
+    with open("movie_data_series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+        request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
+    runtime = 0
+    ctn = 0
+    for time in request_getAllTitles_json_file :
+        if time['series_id'] == id :
+            runtime += time['runtime']
+            ctn += 1
+    runtime = runtime // ctn
     isirani: int = request_series_data['ir']
 
     isdoubble: int = request_series_data['persian']
+
+    seasons_names : dict = {'1' : 'فصل اول','2' : 'فصل دوم','3' : 'فصل سوم','4' : 'فصل چهارم','5' : 'فصل پنجم','6' : 'فصل ششم','7' : 'فصل هفتم','8' : 'فصل هشتم','9' : 'فصل نهم','10' : 'فصل دهم','11' : 'فصل یازدهم','12' : 'فصل دوازدهم','13' : 'فصل سیزدهم','14' : 'فصل چهاردهم','15' : 'فصل پانزدهم','16' : 'فصل شانزدهم', }
+    seasons : dict = {}
+    serialdl : list = []
+    for x in request['data']['season'].keys() :
+        seasons[x] = []
+        serialdl.append({"season-name": seasons_names[x] + " - دوبله فارسی", "episode-count": "",  "dl-links" : [] })
+        serialdl.append({"season-name": seasons_names[x] + " - زیرنویس فارسی", "episode-count": "",  "dl-links" : [] })
     
-    request = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={id}&type=movie&ref={ref}", headers={ 'Accept': 'application/json'})
-
-
-    dl_datails = {
-        "dub_links" : {
-            "dl_480" : { "dl_lnk" : "" , "size" : "" },
-            "dl_720" : { "dl_lnk" : "" , "size" : "" },
-            "dl_1080" : { "dl_lnk" : "" , "size" : "" },
-            "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" },
-            "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" },
-            "dl_HLS" : { "dl_lnk" : "" , "size" : "" },
-
-       },
-        "sub_links" : {
-            "dl_480" : { "dl_lnk" : "" , "size" : "" },
-            "dl_720" : { "dl_lnk" : "" , "size" : "" },
-            "dl_1080" : { "dl_lnk" : "" , "size" : "" },
-            "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" },
-            "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" },
-            "dl_HLS" : { "dl_lnk" : "" , "size" : "" },
-        }
-
-        }
-    
-    request_data_json = request.json()
-    
-
-    for i in request_data_json['data']['links']:
+    for j, (serial, next_item) in zip(seasons.keys(), zip(serialdl[::2], serialdl[1::2])):
+        serial['episode-count'] = f"{len(request['data']['season'][j])} قسمت"
+        next_item['episode-count'] = f"{len(request['data']['season'][j])} قسمت"
+        for w , counter in zip(request['data']['season'][j] , range(1 , len(request['data']['season'][j]) + 1)) :
                 
-                if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
-                    
-                    if "480" in i['title']:
-                        dl_datails['dub_links']["dl_480"]["dl_lnk"] = i['link']
-                        dl_datails['dub_links']["dl_480"]["size"] = i['size']
-
-                    elif "720" in i['title']:
-                        dl_datails['dub_links']["dl_720"]["dl_lnk"] = i['link']
-                        dl_datails['dub_links']["dl_720"]["size"] = i['size']
-
-                    elif "کیفیت 1080" in i['title']:
-                        dl_datails['dub_links']["dl_1080"]["dl_lnk"] = i['link']
-                        dl_datails['dub_links']["dl_1080"]["size"] = i['size']
-
-                    elif "کیفیت HQ_1080" in i['title']:
-                        dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
-                        dl_datails['dub_links']["dl_HQ_1080"]["size"] = i['size']
-
-                    elif "BLURAY" in i['title']:
-                        dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
-                        dl_datails['dub_links']["dl_BLURAY"]["size"] = i['size']
-
-                    elif "HLS" in i['title'] :
-                        dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
-                        dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
-            
-    for i in request_data_json['data']['links']:
-
-                if i['type'] == "traffic" and "IFRAME" not in i['title'] :
-                    
-                    if "480" in i['title'] and "زیرنویس" in i['title']:
-                        dl_datails['sub_links']["dl_480"]["dl_lnk"] = i['link']
-                        dl_datails['sub_links']["dl_480"]["size"] = i['size']
-
-                    elif "720" in i['title'] and "زیرنویس" in i['title']:
-                        dl_datails['sub_links']["dl_720"]["dl_lnk"] = i['link']
-                        dl_datails['sub_links']["dl_720"]["size"] = i['size']
-
-                    elif "کیفیت 1080" in i['title'] and "زیرنویس" in i['title']:
-                        dl_datails['sub_links']["dl_1080"]["dl_lnk"] = i['link']
-                        dl_datails['sub_links']["dl_1080"]["size"] = i['size']
-
-                    elif "کیفیت HQ_1080" in i['title'] and "زیرنویس" in i['title']:
-                        dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
-                        dl_datails['sub_links']["dl_HQ_1080"]["size"] = i['size']
-
-                    elif "BLURAY" in i['title'] and "زیرنویس" in i['title']:
-                        dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
-                        dl_datails['sub_links']["dl_BLURAY"]["size"] = i['size']
+                requestz = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={w['id']}&type=episode&ref={ref}", headers={ 'Accept': 'application/json'})
+                dl_datails = {
+                    "dub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, },
+                    "sub_links" : { "dl_480" : { "dl_lnk" : "" , "size" : "" }, "dl_720" : { "dl_lnk" : "" , "size" : "" }, "dl_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" }, "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" }, "dl_HLS" : { "dl_lnk" : "" , "size" : "" }, }
+                    }
+                request_data_json = requestz.json()
+                for i in request_data_json['data']['links']:
+                                if i['type'] == "traffic" and "IFRAME" not in i['title'] and "زیرنویس" not in i['title'] :
+                                    if "480" in i['title']:
+                                        dl_datails['dub_links']["dl_480"]["dl_lnk"] = i['link']
+                                        dl_datails['dub_links']["dl_480"]["size"] = i['size']
+                                    elif "720" in i['title']:
+                                        dl_datails['dub_links']["dl_720"]["dl_lnk"] = i['link']
+                                        dl_datails['dub_links']["dl_720"]["size"] = i['size']
+                                    elif "کیفیت 1080" in i['title']:
+                                        dl_datails['dub_links']["dl_1080"]["dl_lnk"] = i['link']
+                                        dl_datails['dub_links']["dl_1080"]["size"] = i['size']
+                                    elif "کیفیت HQ_1080" in i['title']:
+                                        dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
+                                        dl_datails['dub_links']["dl_HQ_1080"]["size"] = i['size']
+                                    elif "BLURAY" in i['title']:
+                                        dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
+                                        dl_datails['dub_links']["dl_BLURAY"]["size"] = i['size']
+                                    elif "HLS" in i['title'] :
+                                        dl_datails['dub_links']["dl_HLS"]["dl_lnk"] = i['link']
+                                        dl_datails['dub_links']["dl_HLS"]["size"] = i['size']
+                                        
+                for i in request_data_json['data']['links']:
+                            if i['type'] == "traffic" and "IFRAME" not in i['title'] :
+                                if "480" in i['title'] and "زیرنویس" in i['title']:
+                                    dl_datails['sub_links']["dl_480"]["dl_lnk"] = i['link']
+                                    dl_datails['sub_links']["dl_480"]["size"] = i['size']
+                                elif "720" in i['title'] and "زیرنویس" in i['title']:
+                                    dl_datails['sub_links']["dl_720"]["dl_lnk"] = i['link']
+                                    dl_datails['sub_links']["dl_720"]["size"] = i['size']
+                                elif "کیفیت 1080" in i['title'] and "زیرنویس" in i['title']:
+                                    dl_datails['sub_links']["dl_1080"]["dl_lnk"] = i['link']
+                                    dl_datails['sub_links']["dl_1080"]["size"] = i['size']
+                                elif "کیفیت HQ_1080" in i['title'] and "زیرنویس" in i['title']:
+                                    dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"] = i['link']
+                                    dl_datails['sub_links']["dl_HQ_1080"]["size"] = i['size']
+                                elif "BLURAY" in i['title'] and "زیرنویس" in i['title']:
+                                    dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"] = i['link']
+                                    dl_datails['sub_links']["dl_BLURAY"]["size"] = i['size']
+                                elif "HLS" in i['title']:
+                                    dl_datails['sub_links']["dl_HLS"]["dl_lnk"] = i['link']
+                                    dl_datails['sub_links']["dl_HLS"]["size"] = i['size']
+  
                         
-                    elif "HLS" in i['title']:
-                        dl_datails['sub_links']["dl_HLS"]["dl_lnk"] = i['link']
-                        dl_datails['sub_links']["dl_HLS"]["size"] = i['size']
+                seasons[j].append({"number" : w['episode_number'] , "id" : w['id'] , "dl_datails" : dl_datails })
 
+                if dl_datails['dub_links']["dl_480"]["dl_lnk"] != "" :  
 
+                    serial['dl-links'].append(
+                        {"episode": f"قسمت {counter}",
+                        "farsi": "yes",
+                        "farsi-sound": "",
+                        "subtitle": "",
+                        "serial-price": "",
+                        "serial_info": "",
+                        "is_free": False,
+                        "subtitle_online_serial": "",
+                        "online_link_serial": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
+                        "online_link_480": "",
+                        "online_link_720": "",
+                        "online_link_1080": "",
+                        "serial_480": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
+                        "serial_720": "",
+                        "serial_1080": "",
+                        "quality" : [
+                            { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['dub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_480"]["size"], "sale": False },
+                            { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['dub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_720"]["size"], "sale": False },
+                            { "quality-name-select": "1080p", "quality-name": "1080p", "quality-dl-link": dl_datails['dub_links']["dl_1080"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_1080"]["size"], "sale": False },
+                            { "quality-name-select": "1080p_HQ", "quality-name": "1080p_HQ", "quality-dl-link": dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_HQ_1080"]["size"], "sale": False } if dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] != "" else None,
+                            { "quality-name-select": "BluRay", "quality-name": "BluRay", "quality-dl-link": dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_BLURAY"]["size"], "sale": False } if dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] != "" else None
+                        ]
+                })
 
+                if dl_datails['sub_links']["dl_480"]["dl_lnk"] != "" :
 
+                    next_item['dl-links'].append(
+                        {"episode": f"قسمت {counter}",
+                        "farsi": "yes",
+                        "farsi-sound": "",
+                        "subtitle": "",
+                        "serial-price": "",
+                        "serial_info": "",
+                        "is_free": False,
+                        "subtitle_online_serial": "",
+                        "online_link_serial": dl_datails['sub_links']["dl_HLS"]["dl_lnk"],
+                        "online_link_480": "",
+                        "online_link_720": "",
+                        "online_link_1080": "",
+                        "serial_480": dl_datails['sub_links']["dl_HLS"]["dl_lnk"],
+                        "serial_720": "",
+                        "serial_1080": "",
+                        "quality" : [
+                            { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['sub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_480"]["size"], "sale": False },
+                            { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['sub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_720"]["size"], "sale": False },
+                            { "quality-name-select": "1080p", "quality-name": "1080p", "quality-dl-link": dl_datails['sub_links']["dl_1080"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_1080"]["size"], "sale": False },
+                            { "quality-name-select": "1080p_HQ", "quality-name": "1080p_HQ", "quality-dl-link": dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_HQ_1080"]["size"], "sale": False } if dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"] != "" else None,
+                            { "quality-name-select": "BluRay", "quality-name": "BluRay", "quality-dl-link": dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_BLURAY"]["size"], "sale": False } if dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"] != "" else None
+                        ]
+                })
+
+    for i in serialdl :
+        if i['dl-links'] == [] :
+            serialdl.remove(i)
+    for i in serialdl :
+        if i['dl-links'] == [] :
+            serialdl.remove(i)        
     return {
         "id": id,
         "name": name,
@@ -691,10 +745,13 @@ def get_series_data(id : dict) -> dict:
         "genre": genre,
         "rate": rate,
         "age": age,
-        "imdb": imdb,
         "runtime": runtime,
         "dl_datials": dl_datails,
         "isdoubble": isdoubble,
-        "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False
+        "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False,
+        "serialdl": serialdl,
+        "seasons" : seasons
     }
+
+
 

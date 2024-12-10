@@ -13,7 +13,7 @@ with tqdm(
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://vod.tarinet.ir/wp-json/wp/v2/categories?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/categories?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 continue
