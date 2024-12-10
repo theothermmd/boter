@@ -52,7 +52,8 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             count = 0
         
         movie_data = get_series_data(movie['id'])
-
+        if movie_data == None :
+            continue
 
         if movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] == "":
             continue
