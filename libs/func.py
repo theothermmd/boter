@@ -687,11 +687,11 @@ def get_series_data(id : dict) -> dict:
                         "serial_info": "",
                         "is_free": False,
                         "subtitle_online_serial": "",
-                        "online_link_serial": "",
+                        "online_link_serial": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
                         "online_link_480": "",
                         "online_link_720": "",
                         "online_link_1080": "",
-                        "serial_480": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
+                        "serial_480": "",
                         "serial_720": "",
                         "serial_1080": "",
                         "quality" : [
@@ -718,7 +718,7 @@ def get_series_data(id : dict) -> dict:
                         "online_link_480": "",
                         "online_link_720": "",
                         "online_link_1080": "",
-                        "serial_480": dl_datails['sub_links']["dl_HLS"]["dl_lnk"],
+                        "serial_480": "",
                         "serial_720": "",
                         "serial_1080": "",
                         "quality" : [
