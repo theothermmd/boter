@@ -260,6 +260,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
                 for attempt in range(3):
                     try:
+                        print("test")
                         response = requests.post( "https://moviepix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=240)
                         break
                     except:
