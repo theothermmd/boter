@@ -687,7 +687,7 @@ def get_series_data(id : dict) -> dict:
                         "serial_info": "",
                         "is_free": False,
                         "subtitle_online_serial": "",
-                        "online_link_serial": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
+                        "online_link_serial": "",
                         "online_link_480": "",
                         "online_link_720": "",
                         "online_link_1080": "",
