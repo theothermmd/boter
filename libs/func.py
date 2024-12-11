@@ -766,7 +766,7 @@ def get_series_data(id : dict) -> dict:
                             "online_link_480": "",
                             "online_link_720": "",
                             "online_link_1080": "",
-                            "serial_480": dl_datails['sub_links']["dl_HLS"]["dl_lnk"] if dl_datails['sub_links']["dl_HLS"]["dl_lnk"] != "" else None,
+                            "serial_480": dl_datails['sub_links']["dl_480"]["dl_lnk"] if dl_datails['sub_links']["dl_480"]["dl_lnk"] != "" else None,
                             "serial_720": "",
                             "serial_1080": "",
                             "quality" : [
