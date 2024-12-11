@@ -716,9 +716,9 @@ def get_series_data(id : dict) -> dict:
                         "serial_720": "",
                         "serial_1080": "",
                         "quality" : [
-                            { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['dub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_480"]["size"], "sale": False },
-                            { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['dub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_720"]["size"], "sale": False },
-                            { "quality-name-select": "1080p", "quality-name": "1080p", "quality-dl-link": dl_datails['dub_links']["dl_1080"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_1080"]["size"], "sale": False },
+                            { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['dub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_480"]["size"], "sale": False } if dl_datails['dub_links']["dl_480"]["dl_lnk"] != "" else None,
+                            { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['dub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_720"]["size"], "sale": False } if dl_datails['dub_links']["dl_720"]["dl_lnk"] != "" else None,
+                            { "quality-name-select": "1080p", "quality-name": "1080p", "quality-dl-link": dl_datails['dub_links']["dl_1080"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_1080"]["size"], "sale": False } if dl_datails['dub_links']["dl_1080"]["dl_lnk"] != "" else None,
                             { "quality-name-select": "1080p_HQ", "quality-name": "1080p_HQ", "quality-dl-link": dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_HQ_1080"]["size"], "sale": False } if dl_datails['dub_links']["dl_HQ_1080"]["dl_lnk"] != "" else None,
                             { "quality-name-select": "BluRay", "quality-name": "BluRay", "quality-dl-link": dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_BLURAY"]["size"], "sale": False } if dl_datails['dub_links']["dl_BLURAY"]["dl_lnk"] != "" else None
                         ]
@@ -743,9 +743,9 @@ def get_series_data(id : dict) -> dict:
                         "serial_720": "",
                         "serial_1080": "",
                         "quality" : [
-                            { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['sub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_480"]["size"], "sale": False },
-                            { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['sub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_720"]["size"], "sale": False },
-                            { "quality-name-select": "1080p", "quality-name": "1080p", "quality-dl-link": dl_datails['sub_links']["dl_1080"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_1080"]["size"], "sale": False },
+                            { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['sub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_480"]["size"], "sale": False } if dl_datails['sub_links']["dl_480"]["dl_lnk"] != "" else None,
+                            { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['sub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_720"]["size"], "sale": False } if dl_datails['sub_links']["dl_720"]["dl_lnk"] != "" else None,
+                            { "quality-name-select": "1080p", "quality-name": "1080p", "quality-dl-link": dl_datails['sub_links']["dl_1080"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_1080"]["size"], "sale": False } if dl_datails['sub_links']["dl_1080"]["dl_lnk"] != "" else None,
                             { "quality-name-select": "1080p_HQ", "quality-name": "1080p_HQ", "quality-dl-link": dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_HQ_1080"]["size"], "sale": False } if dl_datails['sub_links']["dl_HQ_1080"]["dl_lnk"] != "" else None,
                             { "quality-name-select": "BluRay", "quality-name": "BluRay", "quality-dl-link": dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"], "serial_size": dl_datails['sub_links']["dl_BLURAY"]["size"], "sale": False } if dl_datails['sub_links']["dl_BLURAY"]["dl_lnk"] != "" else None
                         ]
