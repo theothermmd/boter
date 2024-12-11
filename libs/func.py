@@ -599,7 +599,7 @@ def get_series_data(id : dict) -> dict:
     rate: str = request_series_data['rate']
 
     age: str = request_series_data['age']
-
+    sub : bool = False
     with open('/root/boter/libs/movie_data_series.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
     runtime = 0
@@ -696,7 +696,8 @@ def get_series_data(id : dict) -> dict:
   
                         
                 seasons[j].append({"number" : w['episode_number'] , "id" : w['id'] , "dl_datails" : dl_datails })
-
+                if dl_datails['sub_links']["dl_480"]["dl_lnk"] != "" :
+                    sub = True
                 if dl_datails['dub_links']["dl_480"]["dl_lnk"] != "" :  
 
                     serial['dl-links'].append(
@@ -737,7 +738,7 @@ def get_series_data(id : dict) -> dict:
                             "serial_info": "",
                             "is_free": False,
                             "subtitle_online_serial": "",
-                            "online_link_serial": dl_datails['sub_links']["dl_HLS"]["dl_lnk"],
+                            "online_link_serial": dl_datails['sub_links']["dl_480"]["dl_lnk"],
                             "online_link_480": "",
                             "online_link_720": "",
                             "online_link_1080": "",
@@ -802,7 +803,7 @@ def get_series_data(id : dict) -> dict:
         "runtime": runtime,
         "dl_datials": dl_datails,
         "isdoubble": isdoubble,
-        "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False,
+        "sub": sub,
         "serialdl": serialdl,
         "seasons" : seasons,
         "erros"  : erros
