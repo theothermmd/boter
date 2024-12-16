@@ -91,7 +91,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
                     file.write(json.dumps(errors_nazade, ensure_ascii=False))
 
-        except:
+        except Exception as e:
             err_total.append(movie['id'])
             with open('errors_total.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
                 errors_total = json.load( request_getAllTitles_json_final_load3)
@@ -101,7 +101,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             with open('errors_total.json', 'w', encoding='UTF-8') as file:
                 file.write(json.dumps(errors_total, ensure_ascii=False))
 
-
+            print(e)
             progress_bar.update(1)
             continue
 
