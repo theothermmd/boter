@@ -209,23 +209,23 @@ def getAllTitles_series() -> None :
 
     request_getAllTitles_json_final : list = request_getAllTitles_json['data']['all_titles']['data']
 
-    with open('movie_data_series_new.json', 'w', encoding='UTF-8') as file:
+    with open('/root/boter/movie_data_series_new.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
 
-    with open("movie_data_series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    with open("/root/boter/movie_data_series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file = json.load(request_getAllTitles_json_final_load)
 
-    with open("movie_data_series_new.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    with open("/root/boter/movie_data_series_new.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file_new = json.load(request_getAllTitles_json_final_load)
     ls = []
     for i in request_getAllTitles_json_file_new :
             if i not in request_getAllTitles_json_file :
                 ls.append(i)
-    with open('movie_data_series_ekhtelaf.json', 'w', encoding='UTF-8') as file:
+    with open('/root/boter/movie_data_series_ekhtelaf.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( ls, ensure_ascii=False))
 
     print("series getted.")
-
+getAllTitles_series()
 def media_gen(poster_url: str, poster_name: str):
     
     response_Image_poster = requests.get(poster_url, timeout=30)
@@ -457,7 +457,7 @@ def get_series_data(id : dict) -> dict:
 
     age: str = request_series_data['age']
     sub : bool = False
-    with open('movie_data_series_new.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    with open('/root/boter/movie_data_series_new.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
     runtime = 0
     ctn = 0

@@ -91,7 +91,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 with open('errors_eisodes_nazashte.json', 'w', encoding='UTF-8') as file:
                     file.write(json.dumps(errors_nazade, ensure_ascii=False))
 
-        except Exception as e:
+        except:
             err_total.append(movie['id'])
             with open('errors_total.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
                 errors_total = json.load( request_getAllTitles_json_final_load3)
@@ -101,17 +101,16 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             with open('errors_total.json', 'w', encoding='UTF-8') as file:
                 file.write(json.dumps(errors_total, ensure_ascii=False))
 
-            print(e)
+
             progress_bar.update(1)
             continue
 
         if movie_data['dl_datials']['sub_links']['dl_480']['size'] == "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] == "" or movie_data['isdoubble'] == 0:
             progress_bar.update(1)
             continue
-        print("ok1")
         poster = media_gen( poster_url=movie_data['cdn_poster'] , poster_name=movie_data['poster'] )
         headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-        print("ok2")
+
         if poster['status'] == True:
 
             backdrop = media_gen( poster_url=movie_data['cdn_backdrop'] , poster_name=movie_data['backdrop'] )
@@ -172,7 +171,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     countryyy = "محصول کشور ایران"
 
                 genres_ls = movie_data['genre']
-                print("ok3")
+
                 about = f"{"سریال"} {movie_data['name_fa']} {countryyy} در ژانر {genres_ls} که در سال {str(movie_data['year'])} ساخته شده است. شما میتوانید به انتخاب خودتان این {"سریال"} را با {lang} با بهترین کیفیت دانلود و یا به صورت آنلاین از مووی پیکس تماشا کنید."
                 send_data = {
                         "yearr": [get_year(str(movie_data['year']) , years)['id']],
@@ -274,7 +273,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 
 
 
-                print("ok4")
+
 
                 for attempt in range(3):
                         try:
@@ -282,13 +281,11 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             break
                         except:
                             continue
-                print("ok5")
                 if response.status_code == 400 :
                         with open('errorssssssssssssssssssssssssssssss.json', 'w', encoding='UTF-8') as file:
                             file.write(json.dumps(response.json(), ensure_ascii=False))
                 if response.status_code == 200 or response.status_code == 201:
                         post_id = response.json()["id"]
-                        print("ok6")
                         for attempt in range(3):
                             try:
                                 response = requests.put(f"https://cartoonflix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"genre" : genres}, timeout=40)
@@ -297,7 +294,6 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 continue
       
                         if response.status_code == 200:
-                            print("ok7")
 
                             db_post_backdrop['data'].append( {movie_data['id']:  {"post_id": post_id, "poster_id": poster['media_id']}})
     
@@ -310,7 +306,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                         continue
                                 except :
                                     continue
-                            print("ok8")
+                                
                             ers[movie_data['name']] = movie_data['erros']
                             progress_bar.update(1)
                 else:
