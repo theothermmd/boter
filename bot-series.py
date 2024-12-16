@@ -100,7 +100,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
             with open('errors_total.json', 'w', encoding='UTF-8') as file:
                 file.write(json.dumps(errors_total, ensure_ascii=False))
 
-
+ 
             progress_bar.update(1)
             continue
 
@@ -274,9 +274,9 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
 
 
 
-                for attempt in range(3):
+                for attempt in range(5):
                         try:
-                            response = requests.post( "https://cartoonflix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=40)
+                            response = requests.post( "https://cartoonflix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=60)
                             break
                         except:
                             continue
@@ -285,9 +285,9 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             file.write(json.dumps(response.json(), ensure_ascii=False))
                 if response.status_code == 200 or response.status_code == 201:
                         post_id = response.json()["id"]
-                        for attempt in range(3):
+                        for attempt in range(5):
                             try:
-                                response = requests.put(f"https://cartoonflix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"genre" : genres}, timeout=40)
+                                response = requests.put(f"https://cartoonflix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"genre" : genres}, timeout=60)
                                 break
                             except:
                                 continue
