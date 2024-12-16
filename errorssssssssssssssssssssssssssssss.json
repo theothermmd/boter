@@ -1,0 +1,1 @@
+{"code": "rest_invalid_param", "message": "پارامتر(های) نامعتبر: acf", "data": {"status": 400, "params": {"acf": "acf[slider_image2] به یک شناسه پیوست معتبر نیاز دارد."}, "details": {"acf": {"code": "rest_invalid_param", "message": "acf[slider_image2] به یک شناسه پیوست معتبر نیاز دارد.", "data": {"param": "acf[slider_image2]", "value": 1}}}}}

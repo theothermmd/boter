@@ -1,14 +1,6 @@
 import requests
 import json
-
-
-from functools import wraps
-
-
-
-ref: int = 5198534
-
-bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzMzNzQzMDQ2LCJuYmYiOjE3MzM3NDMwNDYsImV4cCI6MTczNjMzNTA0NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.3nhDfqRZ7BbdCg7cCcO1j_uBvR4LcO3j5LqEswO5gX0"
+bearer_token : str ="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2NhcnRvb25mbGl4LmlyIiwiaWF0IjoxNzM0Mzc5NjE1LCJuYmYiOjE3MzQzNzk2MTUsImV4cCI6MTczNjk3MTYxNSwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMTk1In19fQ.Ntq6LW-DQBgO_3NGFx-8IMkOiA8rWkX369IUUZt6Le0"
 cdn : dict = {
     "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/",
     "backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/",
@@ -19,82 +11,19 @@ cdn : dict = {
     "sm_poster": "https://s35.upera.net/thumb?w=225&h=333&q=90&a=t&src=https://s35.upera.net/s3/posters/",
     "sm_backdrop": "https://s35.upera.net/thumb?w=191&h=100&q=90&src=https://s35.upera.net/s3/backdrops/"
 }
-def try_execute(func, *args, retries=3, **kwargs):
-    """
-    Tries to execute a function up to a specified number of retries.
-    
-    Parameters:
-        func (callable): The function to execute.
-        *args: Positional arguments to pass to the function.
-        retries (int): Number of retry attempts (default: 3).
-        **kwargs: Keyword arguments to pass to the function.
-    
-    Returns:
-        The result of the function if successful.
-    
-    Raises:
-        Exception: If all attempts fail.
-    """
-    for attempt in range(retries):
+ref: int = 5198534
+from io import BytesIO
+
+def try_execute(function, max_retries: int = 3):
+    for retry in range(max_retries):
         try:
-            return func(*args, **kwargs)
+            result = function()
+            return {'status': True, 'result': result}
         except Exception as e:
-            if attempt < retries - 1:
-                continue
-            else:
-                raise e
+            if retry == max_retries - 1:
+                return {'status': False, 'result': str(e)}
 
-
-def get_Directors() :
-    directors = {'directors' : []}
-
-    for i in range(1 , 200) :
-        for attempt in range(3):
-            try :
-                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/director?per_page=100&page={i}' , timeout=30)
-                break
-            except :
-                continue
-        
-        if response.status_code == 200 :
-            if len(response.json()) == 0 :
-                break
-            for j in response.json() :
-                directors['directors'].append({'name' : j['name'] , 'id' : j['id']})
-            return directors
-        
-        else :
-            return None
-            
-
-
-def get_Actors() :
-    actors = {'actors' : []}
-
-    for i in range(1 , 200) :
-        for attempt in range(3):
-            try :
-                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/actor?per_page=100&page={i}' , timeout=30)
-                break
-            except :
-                continue
-        
-        if response.status_code == 200 :
-            if len(response.json()) == 0 :
-                break
-            for j in response.json() :
-                actors['actors'].append({'name' : j['name'] , 'id' : j['id']})
-
-            return actors
-        
-        else :
-            return None
-
-
-
-
-
-def get_movie_data(movie_json_file : dict) -> dict:
+def get_movie_data(movie_json_file):
 
 
     id: str = movie_json_file['id']
@@ -235,7 +164,6 @@ def get_movie_data(movie_json_file : dict) -> dict:
         "sub": True if dl_datails['sub_links']['dl_480']['dl_lnk'] != "" else False
     }
 
-
 def getAllTitles_movie() -> None :
     
     request_getAllTitles = requests.get( "https://seeko.film/api/v1/get/getAllTitles?f_type=movie", headers={'Accept': 'application/json'})
@@ -247,6 +175,32 @@ def getAllTitles_movie() -> None :
     with open('movie_data_movie.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
     print("movie getted.")
+
+def getAllTitles_movie_new() :
+    request_getAllTitles = requests.get( "https://seeko.film/api/v1/get/getAllTitles?f_type=movie", headers={'Accept': 'application/json'})
+
+    request_getAllTitles_json = request_getAllTitles.json()
+
+    request_getAllTitles_json_final : list = request_getAllTitles_json['data']['all_titles']['data']
+
+    with open('movie_data_movie_new.json', 'w', encoding='UTF-8') as file:
+        file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
+
+    with open("movie_data_movie.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+        request_getAllTitles_json_file = json.load(request_getAllTitles_json_final_load)
+
+    with open("movie_data_movie_new.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+        request_getAllTitles_json_file_new = json.load(request_getAllTitles_json_final_load)
+    ls = []
+    for i in request_getAllTitles_json_file_new :
+            if i not in request_getAllTitles_json_file :
+                ls.append(i)
+    with open('movie_data_movie_ekhtelaf.json', 'w', encoding='UTF-8') as file:
+        file.write(json.dumps( ls, ensure_ascii=False))
+
+    print("movie getted.")
+
+
 def getAllTitles_series() -> None :
     
     request_getAllTitles = requests.get( "https://seeko.film/api/v1/get/getAllTitles?f_type=series", headers={'Accept': 'application/json'})
@@ -255,115 +209,35 @@ def getAllTitles_series() -> None :
 
     request_getAllTitles_json_final : list = request_getAllTitles_json['data']['all_titles']['data']
 
-    with open('/root/boter/libs/movie_data_series.json', 'w', encoding='UTF-8') as file:
+    with open('movie_data_series_new.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
+
+    with open("movie_data_series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+        request_getAllTitles_json_file = json.load(request_getAllTitles_json_final_load)
+
+    with open("movie_data_series_new.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+        request_getAllTitles_json_file_new = json.load(request_getAllTitles_json_final_load)
+    ls = []
+    for i in request_getAllTitles_json_file_new :
+            if i not in request_getAllTitles_json_file :
+                ls.append(i)
+    with open('movie_data_series_ekhtelaf.json', 'w', encoding='UTF-8') as file:
+        file.write(json.dumps( ls, ensure_ascii=False))
+
     print("series getted.")
-getAllTitles_series()
-def get_series_data(movie_json_file : dict) -> dict:
 
+def media_gen(poster_url: str, poster_name: str):
     
-    id: str = movie_json_file['data']['series']['id']
-    name: str = movie_json_file['data']['series']['name']
-    name_fa: str = movie_json_file['data']['series']['name_fa']
-    poster: str = movie_json_file['data']['series']['poster']
-    cdn_poster: str = cdn["poster"] + poster
-    backdrop: str = movie_json_file['data']['series']['backdrop']
-    cdn_backdrop: str = cdn["backdrop"] + backdrop
-    isirani: int = movie_json_file['data']['series']['ir']
-    overview_fa: str = movie_json_file['data']['series']['overview_fa']
-    year: str = movie_json_file['data']['series']['year']
-    genre: str = movie_json_file['data']['series']['genre']
-    rate: str = movie_json_file['data']['series']['rate']
-    age: str = movie_json_file['data']['series']['age']
-    runtime: str = movie_json_file['data']['series']['hour']
-    ispersian_or_doubble: int = movie_json_file['data']['series']['persian']
-    season_count : int = len(movie_json_file['data']['series']['season'])
-
-    for i in range(0 , season_count) :
-        for j in movie_json_file['data']['series']['season'][i] :
-            request = requests.post(f"https://seeko.film/api/v1/ghost/get/getaffiliatelinks?id={j['id']}&type=episode&ref=5198534", headers={ 'Accept': 'application/json'})
-
-
-    dl_datails = {
-       "dub_links" : {
-        "dl_480" : { "dl_lnk" : "" , "size" : "" },
-        "dl_720" : { "dl_lnk" : "" , "size" : "" },
-        "dl_1080" : { "dl_lnk" : "" , "size" : "" },
-        "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" },
-        "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" },
-        "dl_HLS" : { "dl_lnk" : "" , "size" : "" },
-       },
-
-        "sub_links" : {
-            "dl_480" : { "dl_lnk" : "" , "size" : "" },
-            "dl_720" : { "dl_lnk" : "" , "size" : "" },
-            "dl_1080" : { "dl_lnk" : "" , "size" : "" },
-            "dl_HQ_1080" : { "dl_lnk" : "" , "size" : "" },
-            "dl_BLURAY" : { "dl_lnk" : "" , "size" : "" },
-            "dl_HLS" : { "dl_lnk" : "" , "size" : "" },
-        }
-
-        }
-
-    get_movie_links_with_id = f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1"
-
-    request = requests.post(get_movie_links_with_id, headers={ 'Accept': 'application/json'})
-
-
-
-data =   {
-    "type": "movie",
-    "id": "a01a0ca0-9073-11ef-ac89-29491062b877",
-    "name": "Kiayi Academy",
-    "name_fa": "آکادمی کیمیایی",
-    "created_at": "2024-10-22 12:46:15",
-    "updated_at": "2024-10-29 05:43:03",
-    "poster": "terfomywfJtwaVZLpRvs.jpg",
-    "overview": "\"Kimiaei Academy\" follows the journey of young men and women aspiring to enter the professional world of cinema. In this talent discovery and training program, renowned faces and cinema veterans accompany them to help overcome the challenges they face along the way.",
-    "overview_fa": "\"آکادمی کیمیایی\" ماجرای دختران و پسرانی است که قصد ورود به دنیای حرفه‌ای سینما را دارند و در این استعدادیابی و آموزش، چهره‌های مطرح و بزرگان سینما با آنها همراه می‌شوند تا این چالش را پشت سر بگذارند.",
-    "year": 2024,
-    "genre": "Documentary",
-    "rate": 6,
-    "backdrop": "CHnB9bkDT7WjMzQHUVez.jpg",
-    "age": "PG-13",
-    "runtime": 90,
-    "free": 0,
-    "traffic": 0,
-    "traffic_oo": 0,
-    "current_time": 0,
-    "duration_time": 0,
-    "player": "aws",
-    "upera": "3001899",
-    "cloud": "aws",
-    "ir": 1,
-    "owner": 5611868,
-    "imdb": None,
-    "persian": 1,
-    "series_id": "0",
-    "series_name": "0",
-    "series_name_fa": "0",
-    "season_number": "0",
-    "episode_number": "0",
-    "tvod_price": "12000.00"
-  }
-
-
-
-
-
-from io import BytesIO
-
-
-def media_gen(poster_url: str, poster_name: str) -> dict:
     response_Image_poster = requests.get(poster_url, timeout=30)
+
     if response_Image_poster.status_code == 200:
+
         poster_content = BytesIO(response_Image_poster.content)
         files = {"file": (poster_name, poster_content)}
         headers = {"Authorization": f"Bearer {bearer_token}"}
         for attempt in range(3):
             try:
-                upload_response = requests.post(
-                    "https://moviepix.ir/wp-json/wp/v2/media", headers=headers, files=files, timeout=30)
+                upload_response = requests.post( "https://cartoonflix.ir/wp-json/wp/v2/media", headers=headers, files=files, timeout=40)
                 break
             except:
                 if attempt == 2:
@@ -373,18 +247,17 @@ def media_gen(poster_url: str, poster_name: str) -> dict:
             poster_id = upload_response.json()["id"]
             return {"status": True, "media_id": poster_id, "media_name": poster_name}
         else:
-            return {"status": None, "message": "Error in generate poster id in wordpress"}
+            return {"status": None, "message": upload_response.text}
     else:
         return {"status": None, "message": "Error in get poster from url"}
 
-
-def get_year_as_list(): 
+def get_years_as_list():
     yearr = {'yearr' : []}
 
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/yearr?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://cartoonflix.ir/wp-json/wp/v2/yearr?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -399,81 +272,87 @@ def get_year_as_list():
 
             return yearr['yearr']
         
-
-
-def get_yearr(name: str , actors : list): 
+        
+def get_year(name: str, year_list):
 
             flg = False
-            for i in actors :
+            for i in year_list :
                 if i['name'] == name :
                     flg = True
                     break
             if flg :
-                for i in actors :
+                for i in year_list :
                     if i['name'] == name :
                         return {'flag' : False , 'name':  i['name'],  'id' : i['id']}
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_yearr = requests.post( f"https://moviepix.ir/wp-json/wp/v2/yearr", headers=headers,  json=data, timeout=30)
+                new_yearr = requests.post( f"https://cartoonflix.ir/wp-json/wp/v2/yearr", headers=headers,  json=data, timeout=30)
                 if new_yearr.status_code != 400 :
-                    actors.append({'name' : name , 'id' : new_yearr.json()['id']})
+                    year_list.append({'name' : name , 'id' : new_yearr.json()['id']})
                     return  {'flag' : True , 'name' : new_yearr.json()['name'] , 'id' : new_yearr.json()['id']}
                 else :
                     return  {'flag' : False , 'name' : name , 'id' : new_yearr.json()['data']['term_id']}
         
+def get_directors_as_list() :
+    """Retrieve a list of director objects from the WordPress API.
 
+    Returns:
+        A list of dictionaries, where each dictionary contains the name and ID of a director.
+    """
+    directors = []
 
-def get_Directors_as_list() :
-    directors = {'directors' : []}
+    for page in range(1, 200):
+        response = requests.get(
+            f"https://cartoonflix.ir/wp-json/wp/v2/director?per_page=100&page={page}",
+            timeout=30,
+        )
 
-    for i in range(1 , 200) :
-        for attempt in range(3):
-            try :
-                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/director?per_page=100&page={i}' , timeout=30)
+        if response.status_code == 200:
+            director_data = response.json()
+
+            if not director_data:
                 break
-            except :
-                if attempt == 2:
-                    return {"status": None, "message": "Error in upload_response"}
-                continue
+
+            directors.extend(
+                [{"name": director["name"], "id": director["id"]} for director in director_data]
+            )
+
+    return directors
         
-        if response.status_code == 200 :
-            if len(response.json()) == 0 :
-                return {"status": None, "message": "Error in 2"}
-            for j in response.json() :
-                directors['directors'].append({'name' : j['name'] , 'id' : j['id']})
+def get_director(name: str, directors) :
+    """Retrieve a director object from the WordPress API, or create a new one if it does not exist.
 
-            return directors['directors']
-        
+    Args:
+        name (str): The name of the director to retrieve or create.
+        directors (List[Dict[str, Union[str, int]]]): A list of director objects.
 
-def get_Directors(name: str , directors : list): 
+    Returns:
+        A dictionary containing the name, ID, and a flag indicating whether the director was created or retrieved.
+    """
 
-            flg = False
-            for i in directors :
-                if i['name'] == name :
-                    flg = True
-            if flg :
-                for i in directors :
-                    if i['name'] == name :
-                        return {'flag' : False , 'id' : i['id']}
-            else :
-                data = {"name" : f"{str(name)}" }
-                headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_director = requests.post( f"https://moviepix.ir/wp-json/wp/v2/director", headers=headers,  json=data, timeout=30)
-                if new_director.status_code != 400 :
-                    directors.append({'name' : name , 'id' : new_director.json()['id']})
-                    return  {'flag' : True , "name" : new_director.json()['name'] , 'id' : new_director.json()['id']}
-                else :
-                    return {'flag' : False , 'id' : new_director.json()['data']['term_id']}
-        
+    for director in directors:
+        if director["name"] == name:
+            return {"flag": False, "name": director["name"], "id": director["id"]}
 
-def get_genres_as_list() :
+    data = {"name": name}
+    headers = {"Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}
+
+    response = requests.post("https://cartoonflix.ir/wp-json/wp/v2/director", headers=headers, json=data, timeout=30)
+
+    if response.status_code == 201:
+        directors.append({"name": response.json()["name"], "id": response.json()["id"]})
+        return {"flag": True, "name": response.json()["name"], "id": response.json()["id"]}
+    else:
+        return {"flag": False, "name": name, "id": response.json()["data"]["term_id"]}
+    
+def get_genres_as_list():
     ganres = {'ganres' : []}
 
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/genre?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://cartoonflix.ir/wp-json/wp/v2/genre?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -488,37 +367,33 @@ def get_genres_as_list() :
 
             return ganres['ganres']
         
-
-
-def get_ganres(name: str , ganres : list): 
+def get_genre(name: str, genres) :
 
             flg = False
-            for i in ganres :
+            for i in genres :
                 if i['name'] == name :
                     flg = True
             if flg :
-                for i in ganres :
+                for i in genres :
                     if i['name'] == name :
                         return {'flag' : False , 'id' : i['id']}
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_ganre = requests.post( f"https://moviepix.ir/wp-json/wp/v2/genre", headers=headers,  json=data, timeout=30)
+                new_ganre = requests.post( f"https://cartoonflix.ir/wp-json/wp/v2/genre", headers=headers,  json=data, timeout=30)
                 if new_ganre.status_code != 400 :
-                    ganres.append({'name' : name , 'id' : new_ganre.json()['id']})
+                    genres.append({'name' : name , 'id' : new_ganre.json()['id']})
                     return  {'flag' : True , "name" : new_ganre.json()['name'] , 'id' : new_ganre.json()['id']}
                 else :
                     return  {'flag' : False , 'id' : new_ganre.json()['data']['term_id']}
         
-
-
-def get_country_as_list() : 
+def get_countries():
     countrys = {'countrys' : []}
 
     for i in range(1 , 200) :
         for attempt in range(3):
             try :
-                response = requests.get(f'https://moviepix.ir/wp-json/wp/v2/country?per_page=100&page={i}' , timeout=30)
+                response = requests.get(f'https://cartoonflix.ir/wp-json/wp/v2/country?per_page=100&page={i}' , timeout=30)
                 break
             except :
                 if attempt == 2:
@@ -533,9 +408,7 @@ def get_country_as_list() :
 
             return countrys['countrys']
         
-
-def get_country(name: str , countrys : list): 
-
+def get_country(name: str, countrys) :
             flg = False
             for i in countrys :
                 if i['name'] == name :
@@ -547,34 +420,18 @@ def get_country(name: str , countrys : list):
             else :
                 data = {"name" : f"{str(name)}" }
                 headers = { "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json" }
-                new_country = requests.post( f"https://moviepix.ir/wp-json/wp/v2/country", headers=headers,  json=data, timeout=30)
+                new_country = requests.post( f"https://cartoonflix.ir/wp-json/wp/v2/country", headers=headers,  json=data, timeout=30)
                 if new_country.status_code != 400 :
                     countrys.append({'name' : name , 'id' : new_country.json()['id']})
                     return  {'flag' : True , "name" : new_country.json()['name'] , 'id' : new_country.json()['id']}
                 else :
                     return  {'flag' : False , 'id' : new_country.json()['data']['term_id']}
-        
-
-
-
-
-import requests
-ref: int = 5198534
-bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzMzNzQzMDQ2LCJuYmYiOjE3MzM3NDMwNDYsImV4cCI6MTczNjMzNTA0NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.3nhDfqRZ7BbdCg7cCcO1j_uBvR4LcO3j5LqEswO5gX0"
-cdn : dict = { "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/", "backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/", "lg_poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/", "lg_backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/", "md_poster": "https://s35.upera.net/thumb?w=337&h=500&q=90&src=https://s35.upera.net/s3/posters/", "md_backdrop": "https://s35.upera.net/thumb?w=382&h=200&q=90&src=https://s35.upera.net/s3/backdrops/", "sm_poster": "https://s35.upera.net/thumb?w=225&h=333&q=90&a=t&src=https://s35.upera.net/s3/posters/", "sm_backdrop": "https://s35.upera.net/thumb?w=191&h=100&q=90&src=https://s35.upera.net/s3/backdrops/" }
-
-
-
-
-
-
+         
 def get_series_data(id : dict) -> dict:
-    for attempt in range(3):
-        try:
-            request= requests.get(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'} , timeout=30).json()
-            break
-        except :
-            continue   
+
+
+    request= requests.get(f"https://seeko.film/api/v1/ghost/get/series/{id}?affiliate=1", headers={ 'Accept': 'application/json'} , timeout=30).json()
+
     try :
         request_series_data = request['data']['series']
     except :
@@ -600,7 +457,7 @@ def get_series_data(id : dict) -> dict:
 
     age: str = request_series_data['age']
     sub : bool = False
-    with open('/root/boter/libs/movie_data_series.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    with open('movie_data_series_new.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load:
         request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
     runtime = 0
     ctn = 0
@@ -714,8 +571,8 @@ def get_series_data(id : dict) -> dict:
                         "online_link_720": "",
                         "online_link_1080": "",
                         "serial_480": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
-                        "serial_720": "",
-                        "serial_1080": "",
+                        "serial_720": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
+                        "serial_1080": dl_datails['dub_links']["dl_HLS"]["dl_lnk"],
                         "quality" : [
                             { "quality-name-select": "480p", "quality-name": "480p", "quality-dl-link": dl_datails['dub_links']["dl_480"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_480"]["size"], "sale": False } if dl_datails['dub_links']["dl_480"]["dl_lnk"] != "" else None,
                             { "quality-name-select": "720p", "quality-name": "720p", "quality-dl-link": dl_datails['dub_links']["dl_720"]["dl_lnk"], "serial_size": dl_datails['dub_links']["dl_720"]["size"], "sale": False } if dl_datails['dub_links']["dl_720"]["dl_lnk"] != "" else None,
@@ -808,6 +665,7 @@ def get_series_data(id : dict) -> dict:
         "seasons" : seasons,
         "erros"  : erros
     }
+
 
 
 

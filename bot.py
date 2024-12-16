@@ -1,13 +1,14 @@
 import requests
 import json
 import os
-from libs.func import getAllTitles_movie, get_movie_data , get_yearr , get_year_as_list , media_gen , get_ganres , get_country ,   get_genres_as_list , get_country_as_list
-from io import BytesIO
+from libs.func import getAllTitles_movie, get_movie_data , get_year , get_years_as_list , media_gen , get_genre , get_country ,   get_genres_as_list , get_countries
 from tqdm import tqdm
 from colorama import Fore, Style
 count = 0
 apikeys = ['6273c114'  , '42a575eb' , "7dd47dfa" , "57ebdc94"]
-bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3ZvZC50YXJpbmV0LmlyIiwiaWF0IjoxNzMzMTY0ODg2LCJuYmYiOjE3MzMxNjQ4ODYsImV4cCI6MTczMzc2OTY4NiwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.c1NIRwSq2rmFeIZ-OBS7hu32TuD1GwSqwUVPPCVB3To"
+
+bearer_token : str = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL21vdmllcGl4LmlyIiwiaWF0IjoxNzM0Mjc1NjUwLCJuYmYiOjE3MzQyNzU2NTAsImV4cCI6MTczNjg2NzY1MCwiZGF0YSI6eyJ1c2VyIjp7ImlkIjoiMyJ9fX0.S_37MUOjG7yNdS3LK66Us4-b2m4XvUSB914PQlCJ9LY"
+
 cdn : dict = {
     "poster": "https://s35.upera.net/thumb?w=675&h=1000&q=90&src=https://s35.upera.net/s3/posters/",
     "backdrop": "https://s35.upera.net/thumb?w=764&h=400&q=100&src=https://s35.upera.net/s3/backdrops/",
@@ -27,19 +28,19 @@ rate = { "G": 4082 , "PG": 8900 , "PG-13": 8901 , "R": 136 }
 
 if not os.path.isfile('movie_data_movie.json'): getAllTitles_movie()
 
-with open("series_2.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
-    request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)['names']
+with open("movie_data_movie_ekhtelaf.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+    request_getAllTitles_json_file = json.load( request_getAllTitles_json_final_load)
 
 
 y = {"erros_name_movie": []}
 
-years = get_year_as_list()
-countrys_list = get_country_as_list()
+years = get_years_as_list()
+countrys_list = get_countries()
 genres_list = get_genres_as_list()
 
 db_post_backdrop = {"data": []}
 
-rev = request_getAllTitles_json_file
+rev = request_getAllTitles_json_file[::-1]
 
 total_items = len(request_getAllTitles_json_file)
 
@@ -87,7 +88,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                             else:
                                 categorie.append(categories['zirnevis'])
 
-
+                
                 
                 rate = []
                 if movie_data['age'] == "G" :
@@ -98,7 +99,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     rate.append(8901)
                 elif movie_data['age'] == "R" : 
                     rate.append(136)
-
+                
                 scorex = []
                 if 0 <= movie_data['rate'] < 2 :
                     scorex.append(145)
@@ -131,12 +132,12 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     lang = "زبان اصلی با زیرنویس فارسی"
                 elif movie_data['dl_datials']['sub_links']['dl_480']['size'] != "" and movie_data['dl_datials']['dub_links']['dl_480']['size'] != "":
                     lang = "دوبله فارسی + زبان اصلی"
-
+                
                 genres = []
                 for i in str(movie_data['genre']).split(",") :
                         
                         if i != "" :
-                            ls = get_ganres(i.strip() , genres_list)
+                            ls = get_genre(i.strip() , genres_list)
 
                             if ls['flag'] == True :
                                     genres_list.append({'name' : ls['name'] , 'id' : ls['id']})
@@ -174,7 +175,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     
                 else :
                     country.append(117)
-
+                
                 film_dl = []
 
                 if movie_data['sub'] == False and movie_data['isdoubble'] == 1 :
@@ -426,7 +427,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 }
                             ]  
                     
-
+                
                 type_file = ""
                 if categories['animation'] in categorie :
                     type_file = "انیمیشن"
@@ -448,7 +449,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                 if lang == "زبان فارسی" :
                     lang = "فارسی"
                 send_data = {
-                        "yearr": [get_yearr(str(movie_data['year']) , years)['id']],
+                        "yearr": [get_year(str(movie_data['year']) , years)['id']],
                         "type_of_post": [ 995 ],
                         "title": movie_data['name_fa'],
                         "content": "",
@@ -468,8 +469,8 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 "title": "hello",
                                 "filename": backdrop['media_name'],
                                 "filesize": 397067,
-                                "url": f"https://vod.tarinet.ir/wp-content/uploads/2024/11/{backdrop['media_name']}",
-                                "link": f"https://vod.tarinet.ir/tt1535108/{backdrop['media_name']}",
+                                "url": f"https://moviepix.ir/wp-content/uploads/2024/11/{backdrop['media_name']}",
+                                "link": f"https://moviepix.ir/tt1535108/{backdrop['media_name']}",
                                 "alt": "",
                                 "author": "2",
                                 "description": "",
@@ -483,7 +484,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                                 "mime_type": "image/jpeg",
                                 "type": "image",
                                 "subtype": "jpeg",
-                                "icon": "https://vod.tarinet.ir/wp-includes/images/media/default.png",
+                                "icon": "https://moviepix.ir/wp-includes/images/media/default.png",
                                 "width": 1920,
                                 "height": 1080,
 
@@ -541,32 +542,54 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                         "featured_media": poster['media_id']
 
                     }
-
-            for attempt in range(3):
-                try:
-                    response = requests.post( "https://vod.tarinet.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=20)
+            with open("post-db.json", "r", encoding="utf-8") as postdbs:
+                postdb = json.load(postdbs)
+            flag = False
+            for i in postdb :
+                if movie_data['name_fa'] == i['name_fa'] or  movie_data['name'] == i['en_name']:
+                    flag = True
                     break
-                except:
-                    y['erros_name_movie'].append(movie_data['name_fa'])
-                    continue
-            if response.status_code == 200 or response.status_code == 201:
-                post_id = response.json()["id"]
+            
+            if flag :
+
+                post_id_update = ''
+                for i in postdb :
+                    if i['en_name'] == movie_data['name'] or i['name_fa'] == movie_data['name_fa'] :
+                        post_id_update = i['id']
+                        break
+
                 for attempt in range(3):
                     try:
-                        response = requests.post(f"https://vod.tarinet.ir/wp-json/wp/v2/posts/{post_id}", headers={
-                                                 "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=15)
+                        response = requests.update( f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id_update}", json=send_data, headers=headers, timeout=30)
                         break
                     except:
-                        y['erros_name_movie'].append(
-                            movie_data['name_fa'])
                         continue
-                if response.status_code == 200:
-                    db_post_backdrop['data'].append( {movie_data['id']:  {"post_id": post_id, "poster_id": poster['media_id']}})
-                    progress_bar.update(1)
+                progress_bar.update(1)
+            else :
+
+                for attempt in range(3):
+                    try:
+                        response = requests.post( "https://moviepix.ir/wp-json/wp/v2/posts", json=send_data, headers=headers, timeout=20)
+                        break
+                    except:
+                        continue
+                
+                if response.status_code == 200 or response.status_code == 201:
+                    post_id = response.json()["id"]
+                    for attempt in range(3):
+                        try:
+                            response = requests.post(f"https://moviepix.ir/wp-json/wp/v2/posts/{post_id}", headers={ "Authorization": f"Bearer {bearer_token}", "Content-Type": "application/json"}, json={"categories": categorie}, timeout=15)
+                            break
+                        except:
+                            y['erros_name_movie'].append(
+                                movie_data['name_fa'])
+                            continue
+                    if response.status_code == 200:
+                        progress_bar.update(1)
+                    else:
+                        print("Failed to update post:", response.text)
                 else:
-                    print("Failed to update post:", response.text)
-            else:
-                 print("Error:", response.status_code, response.text)
+                    print("Error:", response.status_code, response.text)
 
 
 with open('errors.json', 'w', encoding='UTF-8') as file:

@@ -1,0 +1,143 @@
+{
+  "id": 69702,
+  "date": "2024-12-15T22:41:34",
+  "date_gmt": "2024-12-15T19:11:34",
+  "guid": {
+    "rendered": "https://moviepix.ir/%d9%88%d9%86%d8%af%d8%a7-%da%a9%d8%ac%d8%a7%d8%b3%d8%aa%d8%9f"
+  },
+  "modified": "2024-12-15T22:41:34",
+  "modified_gmt": "2024-12-15T19:11:34",
+  "slug": "%d9%88%d9%86%d8%af%d8%a7-%da%a9%d8%ac%d8%a7%d8%b3%d8%aa%d8%9f",
+  "status": "publish",
+  "type": "post",
+  "link": "https://moviepix.ir/%d9%88%d9%86%d8%af%d8%a7-%da%a9%d8%ac%d8%a7%d8%b3%d8%aa%d8%9f",
+  "title": { "rendered": "وندا کجاست؟" },
+  "content": { "rendered": "", "protected": false },
+  "excerpt": { "rendered": "", "protected": false },
+  "author": 3,
+  "featured_media": 69700,
+  "comment_status": "open",
+  "ping_status": "open",
+  "sticky": false,
+  "template": "",
+  "format": "standard",
+  "meta": { "_acf_changed": false, "footnotes": "" },
+  "categories": [1],
+  "tags": [],
+  "actor": [],
+  "director": [],
+  "genre": [8666, 8671],
+  "type_of_post": [48],
+  "yearr": [2498],
+  "country": [],
+  "rate": [],
+  "score": [],
+  "class_list": [
+    "post-69702",
+    "post",
+    "type-post",
+    "status-publish",
+    "format-standard",
+    "has-post-thumbnail",
+    "hentry",
+    "category-undefined",
+    "genre-drama-2",
+    "genre-comedy-2",
+    "type_of_post-series",
+    "yearr-2498"
+  ],
+  "acf": false,
+  "thumbnail": "https://moviepix.ir/wp-content/uploads/2024/12/MtFrsCZWhhl5o6VPeA6z.jpg",
+  "_links": {
+    "self": [
+      {
+        "href": "https://moviepix.ir/wp-json/wp/v2/posts/69702",
+        "targetHints": { "allow": ["GET", "POST", "PUT", "PATCH", "DELETE"] }
+      }
+    ],
+    "collection": [{ "href": "https://moviepix.ir/wp-json/wp/v2/posts" }],
+    "about": [{ "href": "https://moviepix.ir/wp-json/wp/v2/types/post" }],
+    "author": [
+      {
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/users/3"
+      }
+    ],
+    "replies": [
+      {
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/comments?post=69702"
+      }
+    ],
+    "version-history": [
+      {
+        "count": 0,
+        "href": "https://moviepix.ir/wp-json/wp/v2/posts/69702/revisions"
+      }
+    ],
+    "wp:featuredmedia": [
+      {
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/media/69700"
+      }
+    ],
+    "wp:attachment": [
+      { "href": "https://moviepix.ir/wp-json/wp/v2/media?parent=69702" }
+    ],
+    "wp:term": [
+      {
+        "taxonomy": "category",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/categories?post=69702"
+      },
+      {
+        "taxonomy": "post_tag",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/tags?post=69702"
+      },
+      {
+        "taxonomy": "actor",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/actor?post=69702"
+      },
+      {
+        "taxonomy": "director",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/director?post=69702"
+      },
+      {
+        "taxonomy": "genre",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/genre?post=69702"
+      },
+      {
+        "taxonomy": "type_of_post",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/type_of_post?post=69702"
+      },
+      {
+        "taxonomy": "yearr",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/yearr?post=69702"
+      },
+      {
+        "taxonomy": "country",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/country?post=69702"
+      },
+      {
+        "taxonomy": "rate",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/rate?post=69702"
+      },
+      {
+        "taxonomy": "score",
+        "embeddable": true,
+        "href": "https://moviepix.ir/wp-json/wp/v2/score?post=69702"
+      }
+    ],
+    "curies": [
+      { "name": "wp", "href": "https://api.w.org/{rel}", "templated": true }
+    ]
+  }
+}

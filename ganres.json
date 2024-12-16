@@ -1,0 +1,702 @@
+[
+    {
+      "id": 53,
+      "count": 452,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/action/",
+      "name": "اکشن",
+      "slug": "action",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/53",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=53"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 1703,
+      "count": 1401,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/animation/",
+      "name": "انیمیشن",
+      "slug": "animation",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/1703",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=1703"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 2253,
+      "count": 14,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/horror/",
+      "name": "ترسناک",
+      "slug": "horror",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/2253",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=2253"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 315,
+      "count": 28,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/crime/",
+      "name": "جنایی",
+      "slug": "crime",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/315",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=315"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 57,
+      "count": 451,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/family/",
+      "name": "خانوادگی",
+      "slug": "family",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/57",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=57"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 244,
+      "count": 94,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/drama/",
+      "name": "درام",
+      "slug": "drama",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/244",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=244"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 535,
+      "count": 46,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/sci-fi/",
+      "name": "علمی تخیلی",
+      "slug": "sci-fi",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/535",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=535"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 2252,
+      "count": 121,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/fantasy/",
+      "name": "فانتزی",
+      "slug": "fantasy",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/2252",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=2252"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 55,
+      "count": 758,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/comedy/",
+      "name": "کمدی",
+      "slug": "comedy",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/55",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=55"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 68,
+      "count": 96,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/short/",
+      "name": "کوتاه",
+      "slug": "short",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/68",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=68"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 56,
+      "count": 1024,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/adventure/",
+      "name": "ماجراجویی",
+      "slug": "adventure",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/56",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=56"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 2395,
+      "count": 16,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/mystery/",
+      "name": "معمایی",
+      "slug": "mystery",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/2395",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=2395"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 67,
+      "count": 23,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/musical/",
+      "name": "موزیکال",
+      "slug": "musical",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/67",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=67"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    },
+    {
+      "id": 54,
+      "count": 13,
+      "description": "",
+      "link": "https://cartoonflix.ir/genre/thriller/",
+      "name": "هیجان انگیز",
+      "slug": "thriller",
+      "taxonomy": "genre",
+      "parent": 0,
+      "meta": [],
+      "acf": [],
+      "_links": {
+        "self": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre/54",
+            "targetHints": {
+              "allow": [
+                "GET",
+                "POST",
+                "PUT",
+                "PATCH",
+                "DELETE"
+              ]
+            }
+          }
+        ],
+        "collection": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/genre"
+          }
+        ],
+        "about": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/taxonomies/genre"
+          }
+        ],
+        "wp:post_type": [
+          {
+            "href": "https://cartoonflix.ir/wp-json/wp/v2/posts?genre=54"
+          }
+        ],
+        "curies": [
+          {
+            "name": "wp",
+            "href": "https://api.w.org/{rel}",
+            "templated": true
+          }
+        ]
+      }
+    }
+  ]

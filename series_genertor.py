@@ -1,7 +1,7 @@
 import json
 
 
-with open("movie_data_series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
+with open("movie_data_series_ekhtelaf.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
     request_getAllTitles_json_file = json.load(request_getAllTitles_json_final_load)[::-1]
 
 

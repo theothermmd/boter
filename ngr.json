@@ -1,0 +1,16 @@
+[
+  { "name": "action", "id": 53 },
+  { "name": "animation", "id": 1703 },
+  { "name": "horror", "id": 2253 },
+  { "name": "crime", "id": 315 },
+  { "name": "family", "id": 57 },
+  { "name": "drama", "id": 244 },
+  { "name": "sci-fi", "id": 535 },
+  { "name": "fantasy", "id": 2252 },
+  { "name": "comedy", "id": 55 },
+  { "name": "short", "id": 68 },
+  { "name": "adventure", "id": 56 },
+  { "name": "mystery", "id": 2395 },
+  { "name": "musical", "id": 67 },
+  { "name": "thriller", "id": 54 }
+]
