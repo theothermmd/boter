@@ -212,18 +212,6 @@ def getAllTitles_series() -> None :
     with open('/root/boter/movie_data_series_new.json', 'w', encoding='UTF-8') as file:
         file.write(json.dumps( request_getAllTitles_json_final, ensure_ascii=False))
 
-    with open("/root/boter/movie_data_series.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
-        request_getAllTitles_json_file = json.load(request_getAllTitles_json_final_load)
-
-    with open("/root/boter/movie_data_series_new.json", "r", encoding="utf-8") as request_getAllTitles_json_final_load:
-        request_getAllTitles_json_file_new = json.load(request_getAllTitles_json_final_load)
-    ls = []
-    for i in request_getAllTitles_json_file_new :
-            if i not in request_getAllTitles_json_file :
-                ls.append(i)
-    with open('/root/boter/movie_data_series_ekhtelaf.json', 'w', encoding='UTF-8') as file:
-        file.write(json.dumps( ls, ensure_ascii=False))
-
     print("series getted.")
 getAllTitles_series()
 def media_gen(poster_url: str, poster_name: str):
