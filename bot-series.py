@@ -91,6 +91,7 @@ with tqdm(total=total_items, bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{per
                     file.write(json.dumps(errors_nazade, ensure_ascii=False))
 
         except:
+            print(movie['id'])
             err_total.append(movie['id'])
             with open('errors_total.json', "r", encoding="utf-8") as request_getAllTitles_json_final_load3:
                 errors_total = json.load( request_getAllTitles_json_final_load3)
